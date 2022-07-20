@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 
-class UsersController extends Controller
+class UserController extends Controller
 {
    public function index()
    {
@@ -51,9 +51,9 @@ class UsersController extends Controller
       //   }
 
       $user = [
-         'firstname_users' => $request->firstname,
-         'lastname_users' => $request->lastname,
-         'email_users' => $request->email,
+         'firstname_users' => $request->firstname_users,
+         'lastname_users' => $request->lastname_users,
+         'email_users' => $request->email_users,
          'password' => $request->password,
          // 'image' => $filename ?? $pathimage[$idphoto] ?? "",
 
@@ -70,9 +70,11 @@ class UsersController extends Controller
       //   ];
       //   users_roles_events::create($$stafproject);
 
+      return response()->json([
+         'success' => 'true',
+         'data' => $newuser,
 
-
-      return redirect()->route('users.index');
+      ], 200);
    }
 
 
