@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProfilPageController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\EventController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -29,3 +30,6 @@ Route::post('/admin/newusers', [UserController::class, 'store']);
 //route::get('/ProfilPages', [ProfilPageController::class, 'index'])->name('profilPages.index');
 route::post('/ProfilPages', [ProfilPageController::class, 'store'])->name('profilPages.store');
 route::post('/ProfilPages', [ProfilPageController::class, 'show'])->name('profilPages.show');
+
+Route::get('/event', [EventController::class, 'index'])->name('event.index');
+Route::post('/event', [EventController::class, 'store'])->name('event.store');
