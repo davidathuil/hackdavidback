@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class SkillsController extends Controller
+class SkillController extends Controller
 {
    public function show($id) {
-      
+
    }
+
+
 }
