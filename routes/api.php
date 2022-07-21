@@ -25,3 +25,4 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/me', [AuthController::class, 'me'])->middleware('auth:sanctum');
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
 Route::post('/admin/newusers', [UserController::class, 'store']);
+Route::get('/users', [UserController::class, 'index'])->name('users.index');
