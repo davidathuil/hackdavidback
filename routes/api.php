@@ -31,5 +31,9 @@ Route::post('/admin/newusers', [UserController::class, 'store']);
 route::post('/ProfilPages', [ProfilPageController::class, 'store'])->name('profilPages.store');
 route::post('/ProfilPages', [ProfilPageController::class, 'show'])->name('profilPages.show');
 
+// USERS
+Route::get('/users', [UserController::class, 'index'])->name('users.index');
+
+// EVENTS
 Route::get('/event', [EventController::class, 'index'])->name('event.index');
 Route::post('/event', [EventController::class, 'store'])->name('event.store');

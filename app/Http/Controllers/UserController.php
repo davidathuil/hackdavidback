@@ -9,6 +9,9 @@ class UserController extends Controller
 {
    public function index()
    {
+      $users = User::all();
+
+      return response()->json(["users" => $users]);
    }
 
 
@@ -37,9 +40,19 @@ class UserController extends Controller
 
       $request->validate(
          [
-            'firstname_users' => 'required|string',
-            'lastname_users' => 'required|string',
-            'email_users' => 'required|string',
+            'firstname_users' => 'required|alpha_dash',
+            'lastname_users' => 'required|alpha_dash',
+            'email_users' => 'required|email',
+            // 'email_verified_at' => 'email',
+            'password' => 'string',
+            // 'adress_users' => 'alpha_dash',
+            // 'likedin_link_users' => 'alpha_dash',
+            // 'web_link_users' => 'alpha_dash',
+            // 'github_link_users' => 'alpha_dash',
+            // 'portfolio_link_users' => 'alpha_dash',
+            // 'biography_users' => 'alpha_dash',
+            // 'image_link_users' => 'alpha_dash',
+            // 'admin' => 'boolean',
             //  'image_link_users' => 'mimes:jpg,jpeg,png|image',
 
          ]
@@ -54,8 +67,20 @@ class UserController extends Controller
          'firstname_users' => $request->firstname_users,
          'lastname_users' => $request->lastname_users,
          'email_users' => $request->email_users,
+         // 'email_verified_at' => $request->email_verified_at,
          'password' => $request->password,
+         // 'adress_users' => $request->adress_users,
+         // 'likedin_link_users' => $request->likedin_link_users,
+         // 'web_link_users' => $request->web_link_users,
+         // 'github_link_users' => $request->github_link_users,
+         // 'portfolio_link_users' => $request->portfolio_link_users,
+         // 'biography_users' => $request->biography_users,
+         // 'image_link_users' => $request->image_link_users,
+         // 'admin' => $request->admin,
          // 'image' => $filename ?? $pathimage[$idphoto] ?? "",
+
+
+
 
 
       ];
@@ -98,4 +123,3 @@ class UserController extends Controller
    {
    }
 }
-
