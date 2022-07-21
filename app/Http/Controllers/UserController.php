@@ -98,4 +98,4 @@ class UserController extends Controller
    {
    }
 }
-Footer
+
