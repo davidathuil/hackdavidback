@@ -18,3 +18,5 @@ use App\Http\Controllers\SkillController;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::post('/event', [EventController::class, 'store'])->name('event.store');
