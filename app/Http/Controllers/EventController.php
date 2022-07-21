@@ -13,7 +13,6 @@ class EventController extends Controller
      */
     public function index()
     {
-        //
     }
 
     /**
@@ -34,7 +33,21 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'names_events' => 'required|string',
+            'start_dates_events' => 'required|date',
+            'end_dates_events' => 'required|date',
+            'end_dates_inscriptions_events' => 'required|date',
+            'location_events' => 'required|string',
+        ]);
+
+        $event = [
+            'names_events' => $request->input('names_events'),
+            'start_dates_events' => $request->input('start_dates_events'),
+            'end_dates_events' => $request->input('end_dates_events'),
+            'end_dates_inscriptions_events' => $request->input('end_dates_events'),
+            'location_events' => $request->input('location_events'),
+        ];
     }
 
     /**
