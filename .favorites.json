@@ -1,34 +1,34 @@
 [
     {
         "type": "Directory",
-        "name": "/Applications/MAMP/htdocs/hackathon-back/database/migrations",
+        "name": "/Applications/MAMP/htdocs/hackdavidback/app/Http/Controllers",
         "parent_id": null,
-        "workspaceRoot": "/Applications/MAMP/htdocs/hackathon-back",
+        "workspaceRoot": "/Applications/MAMP/htdocs/hackdavidback",
+        "workspacePath": "app/Http/Controllers",
+        "id": "HWlfEKAQraN10dLz"
+    },
+    {
+        "type": "Directory",
+        "name": "/Applications/MAMP/htdocs/hackdavidback/app/Models",
+        "parent_id": null,
+        "workspaceRoot": "/Applications/MAMP/htdocs/hackdavidback",
+        "workspacePath": "app/Models",
+        "id": "Ohgp7Xk2d9eGtPiQ"
+    },
+    {
+        "type": "Directory",
+        "name": "/Applications/MAMP/htdocs/hackdavidback/database/migrations",
+        "parent_id": null,
+        "workspaceRoot": "/Applications/MAMP/htdocs/hackdavidback",
         "workspacePath": "database/migrations",
-        "id": "UVXKCWdMnrxaSpFl"
+        "id": "uVfRnwO6H5PXho1j"
     },
     {
         "type": "File",
-        "name": "/Applications/MAMP/htdocs/hackathon-back/routes/api.php",
+        "name": "/Applications/MAMP/htdocs/hackdavidback/routes/api.php",
         "parent_id": null,
-        "workspaceRoot": "/Applications/MAMP/htdocs/hackathon-back",
+        "workspaceRoot": "/Applications/MAMP/htdocs/hackdavidback",
         "workspacePath": "routes/api.php",
-        "id": "r07j9iIUzG2pMabh"
-    },
-    {
-        "type": "Directory",
-        "name": "/Applications/MAMP/htdocs/hackathon-back/app/Models",
-        "parent_id": null,
-        "workspaceRoot": "/Applications/MAMP/htdocs/hackathon-back",
-        "workspacePath": "app/Models",
-        "id": "65mgf38FLR1AHX9P"
-    },
-    {
-        "type": "Directory",
-        "name": "/Applications/MAMP/htdocs/hackathon-back/app/Http/Controllers",
-        "parent_id": null,
-        "workspaceRoot": "/Applications/MAMP/htdocs/hackathon-back",
-        "workspacePath": "app/Http/Controllers",
-        "id": "OzoE5AQL1ZpcfyBm"
+        "id": "3Ouf5ePKl1RZADBC"
     }
 ]

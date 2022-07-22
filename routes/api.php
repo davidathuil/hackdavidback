@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\UserRoleEventController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -33,3 +34,6 @@ Route::get('/users', [UserController::class, 'index'])->name('users.index');
 // EVENTS
 Route::get('/event', [EventController::class, 'index'])->name('event.index');
 Route::post('/event', [EventController::class, 'store'])->name('event.store');
+
+// URE
+Route::get('/users_roles_events', [UserRoleEventController::class, 'index'])->name('users_roles_events.index');
