@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfilPageController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\UserRoleEventController;
+use App\Http\Controllers\RoleController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -41,3 +42,6 @@ Route::post('/event', [EventController::class, 'store'])->name('event.store');
 
 // URE
 Route::get('/users_roles_events', [UserRoleEventController::class, 'index'])->name('users_roles_events.index');
+
+// ROLES
+Route::get('/roles', [RoleController::class, 'index'])->name('roles.index');

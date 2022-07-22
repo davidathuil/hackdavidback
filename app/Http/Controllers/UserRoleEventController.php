@@ -10,8 +10,8 @@ class UserRoleEventController extends Controller
 
     public function index()
     {
+
         $usersRolesEvents = UserRoleEvent::all();
-        dd(UserRoleEvent::all());
 
         return response()->json(["ure" => $usersRolesEvents]);
     }

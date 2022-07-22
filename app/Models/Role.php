@@ -11,4 +11,14 @@ class Role extends Model
     protected $fillable = [
         'names_roles'
     ];
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'user_role_events');
+    }
+
+    public function events()
+    {
+        return $this->belongsToMany(Events::class, 'user_role_events');
+    }
 }
