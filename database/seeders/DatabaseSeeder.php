@@ -29,9 +29,9 @@ class DatabaseSeeder extends Seeder
         $this->call([
             RoleSeeder::class
         ]);
-        // $this->call([
-        //     SkillSeeder::class
-        // ]);
+        $this->call([
+            SkillSeeder::class
+        ]);
         \App\Models\Event::factory(3)->create();
     }
 }
