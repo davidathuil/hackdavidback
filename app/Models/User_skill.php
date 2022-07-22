@@ -9,7 +9,10 @@ class Skill_user extends Model
 {
     use HasFactory;
 
-    public function user(){
+    protected $guarded = ['id'];
+
+    public function user()
+    {
         return $this->belongsTo(user::class);
     }
 }

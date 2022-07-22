@@ -9,5 +9,6 @@ class Skill extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
     protected $fillable = ['name_skills'];
 }

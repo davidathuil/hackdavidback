@@ -27,7 +27,7 @@ return new class extends Migration
             $table->string('portfolio_link_users')->nullable();
             $table->string('biography_users')->nullable();
             $table->string('image_link_users')->nullable();
-            $table->boolean('admin')->nullable();
+            $table->boolean('admin')->nullable()->default(0);
             $table->rememberToken();
             $table->timestamps();
         });

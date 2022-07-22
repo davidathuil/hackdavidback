@@ -7,6 +7,8 @@ use Illuminate\Database\Seeder;
 use Database\Seeders\UserSeeder;
 use Database\Seeders\RoleSeeder;
 use Database\Seeders\SkillSeeder;
+use App\Models\UserRoleEvent;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -29,9 +31,12 @@ class DatabaseSeeder extends Seeder
         $this->call([
             RoleSeeder::class
         ]);
-        // $this->call([
-        //     SkillSeeder::class
-        // ]);
+        $this->call([
+            SkillSeeder::class
+        ]);
         \App\Models\Event::factory(3)->create();
+        \App\Models\User::factory(15)->create([]);
+        // \App\Models\UserRoleEvent::factory(3)->create();
+        \App\Models\UserRoleEvent::factory()->count(10)->create();
     }
 }
