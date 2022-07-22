@@ -4,14 +4,24 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Role;
+use App\Models\UserRoleEvent;
 
 class UserController extends Controller
 {
    public function index()
    {
       $users = User::all();
+      $admins = User::where('admin', 1)->get();
+      $idStaffs = UserRoleEvent::where('role_id', 1)->get('user_id');
+      $idParticipants = UserRoleEvent::where('role_id', 2)->get('user_id');
 
-      return response()->json(["users" => $users]);
+      $staffs = User::find($idStaffs);
+      $participants = User::find($idParticipants);
+      // dump($staffs);
+      // dump($participants);
+
+      return response()->json(["users" => $users, "admins" => $admins, "staffs" => $staffs, "participants" => $participants]);
    }
 
 
