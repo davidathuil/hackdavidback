@@ -5,8 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Room extends Model
+class UserTeam extends Model
 {
     use HasFactory;
-    protected $guarded = ['id_rooms'];
+    protected $guarded = ['id'];
 }
