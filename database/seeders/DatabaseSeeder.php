@@ -7,6 +7,7 @@ use Illuminate\Database\Seeder;
 use Database\Seeders\UserSeeder;
 use Database\Seeders\RoleSeeder;
 use Database\Seeders\SkillSeeder;
+use App\Models\UserRoleEvent;
 
 class DatabaseSeeder extends Seeder
 {
@@ -33,5 +34,6 @@ class DatabaseSeeder extends Seeder
             SkillSeeder::class
         ]);
         \App\Models\Event::factory(3)->create();
+        \App\Models\UserRoleEvent::factory(6)->create();
     }
 }
