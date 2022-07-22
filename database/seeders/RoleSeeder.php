@@ -20,5 +20,9 @@ class RoleSeeder extends Seeder
         Role::create([
             'names_roles' => 'Staff'
         ]);
+
+        Role::create([
+            'names_roles' => 'Participants'
+        ]);
     }
 }
