@@ -20,9 +20,10 @@ class UserRoleEventFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => User::all()->random()->id,
+
             'role_id' => Role::all()->random()->id,
             'event_id' => Event::all()->random()->id_events,
+            'user_id' => User::all()->random()->id,
 
         ];
     }
