@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Room;
 use Illuminate\Http\Request;
 
 class RoomController extends Controller
@@ -13,18 +14,12 @@ class RoomController extends Controller
      */
     public function index()
     {
-        //
+        $room = Room::all();
+
+        return response()->json(["data" => $room]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+
 
     /**
      * Store a newly created resource in storage.
@@ -34,8 +29,27 @@ class RoomController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $request->validate(
+            [
+                'names_rooms' => 'required|string',
+            ]
+        );
+
+        $room = [
+            'names_rooms' => $request->names_rooms,
+        ];
+
+        $newroom = Room::create($room);
+
+
+        return response()->json([
+            'success' => 'true',
+            'data' => $newroom,
+
+        ], 200);
     }
+
 
     /**
      * Display the specified resource.

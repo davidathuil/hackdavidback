@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\UserRoleEventController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\RoomController;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\UserTeamController;
 use Illuminate\Http\Request;
@@ -55,3 +56,6 @@ Route::post('/teams', [TeamController::class, 'store'])->name('teams.store');
 // User teams
 Route::get('/usersteams', [UserTeamController::class, 'index'])->name('usersteams.index');
 Route::get('/usersteams', [UserTeamController::class, 'store'])->name('usersteams.store');
+// Rooms
+Route::get('/rooms', [RoomController::class, 'index'])->name('rooms.index');
+Route::post('/rooms', [RoomController::class, 'store'])->name('rooms.store');
