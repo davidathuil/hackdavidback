@@ -39,7 +39,7 @@ class DatabaseSeeder extends Seeder
         // \App\Models\UserRoleEvent::factory(3)->create();
         \App\Models\UserRoleEvent::factory()->count(10)->create();
         \App\Models\Room::factory()->count(3)->create();
-        \App\Models\Team::factory()->count(4)->create();
-        \App\Models\UserTeam::factory()->count(3)->create();
+        \App\Models\Team::factory()->count(3)->create();
+        \App\Models\UserTeam::factory()->count(15)->create();
     }
 }
