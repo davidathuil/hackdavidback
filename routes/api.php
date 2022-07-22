@@ -31,7 +31,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanc
 Route::post('/admin/newusers', [UserController::class, 'store']);
 //route::get('/ProfilPages', [ProfilPageController::class, 'index'])->name('profilPages.index');
 route::post('/ProfilPages', [ProfilPageController::class, 'store'])->name('profilPages.store');
-route::post('/ProfilPages', [ProfilPageController::class, 'show'])->name('profilPages.show');
+route::get('/ProfilPages/{id}', [ProfilPageController::class, 'show'])->name('profilPages.show');
 
 // USERS
 Route::get('/users', [UserController::class, 'index'])->name('users.index');
