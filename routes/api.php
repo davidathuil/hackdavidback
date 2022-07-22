@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\UserRoleEventController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserTeamController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -45,3 +46,10 @@ Route::get('/users_roles_events', [UserRoleEventController::class, 'index'])->na
 
 // ROLES
 Route::get('/roles', [RoleController::class, 'index'])->name('roles.index');
+
+// Teams
+Route::get('/teams', [TeamController::class, 'index'])->name('teams.index');
+Route::post('/teams', [TeamController::class, 'store'])->name('teams.store');
+// User teams
+Route::get('/usersteams', [UserTeamController::class, 'index'])->name('usersteams.index');
+Route::get('/usersteams', [UserTeamController::class, 'store'])->name('usersteams.store');
