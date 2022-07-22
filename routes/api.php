@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProfilPageController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\UserRoleEventController;
@@ -27,6 +28,9 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/me', [AuthController::class, 'me'])->middleware('auth:sanctum');
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
 Route::post('/admin/newusers', [UserController::class, 'store']);
+//route::get('/ProfilPages', [ProfilPageController::class, 'index'])->name('profilPages.index');
+route::post('/ProfilPages', [ProfilPageController::class, 'store'])->name('profilPages.store');
+route::post('/ProfilPages', [ProfilPageController::class, 'show'])->name('profilPages.show');
 
 // USERS
 Route::get('/users', [UserController::class, 'index'])->name('users.index');

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Skill;
+use App\Models\Skills;
 use Illuminate\Http\Request;
 use App\Models\User;
 
@@ -42,7 +44,12 @@ class ProfilPageController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = user::find($id);
+        $skills = Skill::all();
+        $user_skills = User::find($id)->users_skills;
+
+        return response()->json([$user, $skills ,$user_skills]);
+
     }
 
     /**
