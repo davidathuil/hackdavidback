@@ -41,5 +41,6 @@ class DatabaseSeeder extends Seeder
         \App\Models\Room::factory()->count(3)->create();
         \App\Models\Team::factory()->count(3)->create();
         \App\Models\UserTeam::factory()->count(15)->create();
+        \App\Models\RunningOrder::factory()->count(5)->create();
     }
 }
