@@ -19,7 +19,7 @@ class RunningOrderFactory extends Factory
     {
         return [
             'name_run_orders' => $this->faker->word(),
-            'start_date_run_orders' => $this->faker->dateTimeInInterval('-1 week', '+3 days');,
+            'start_date_run_orders' => $this->faker->dateTimeInInterval('-1 week', '+3 days'),
             'time_run_orders' => $this->faker->time(':i'),
             'teams_quantity_run_orders' => $this->faker->numberBetween(1, Team::all()->count()),
         ];
