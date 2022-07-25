@@ -42,7 +42,7 @@ class UserController extends Controller
          [
             'firstname_users' => 'required|alpha_dash',
             'lastname_users' => 'required|alpha_dash',
-            'email_users' => 'required|email',
+            'email_users' => 'required|email:rfc,dns',
             // 'email_verified_at' => 'email',
             'password' => 'string',
             // 'adress_users' => 'alpha_dash',
@@ -68,7 +68,7 @@ class UserController extends Controller
          'lastname_users' => $request->lastname_users,
          'email_users' => $request->email_users,
          // 'email_verified_at' => $request->email_verified_at,
-         'password' => $request->password,
+         'password' => Hash::make($request->password),
          // 'adress_users' => $request->adress_users,
          // 'likedin_link_users' => $request->likedin_link_users,
          // 'web_link_users' => $request->web_link_users,
