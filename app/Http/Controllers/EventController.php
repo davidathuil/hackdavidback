@@ -60,12 +60,39 @@ class EventController extends Controller
 
     public function update(Request $request, $id)
     {
-        //
+        // Validation de formulaire avant envoie dans la BDD
+        $request->validate([
+            'names_event' => 'required|string',
+            'start_dates_event' => 'required|string',
+            'end_dates_events' => 'required|string',
+            'end_dates_inscriptions_events' => 'required|string',
+            'location_events' => 'required|string',
+        ]);
+
+        $event = $id;
+        $event = Event::find($request->id_events);
+        $event->names_event = $request->input('names_event');
+        $event->start_dates_event = $request->input('start_dates_event');
+        $event->end_dates_events = $request->input('end_dates_events');
+        $event->end_dates_inscriptions_events = $request->input('end_dates_inscriptions_events');
+        $event->location_events = $request->input('location_events');
+        $event->save();
+
+        return response()->json(['message' => 'Evènement modifié avec succès !'], 201);
     }
 
-
-    public function destroy($id)
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+   
+    public function destroy($id, $event)
     {
-        //
+        $event = Event::find($id);
+        $event->delete();
+        return response()->json(['message' => 'Evènement supprimé avec succès !'], 201);
     }
 }
+

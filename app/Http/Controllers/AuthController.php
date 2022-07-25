@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use App\Models\UserRoleEvent;
 
 
 class AuthController extends Controller
@@ -17,6 +18,8 @@ class AuthController extends Controller
             'lastname_users' => 'required|string|max:255',
             'email_users' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8',
+            'id_events' => 'required|numeric',
+            'role_id' => 'required|numeric',
         ]);
 
         $user = User::create([
@@ -28,6 +31,19 @@ class AuthController extends Controller
 
         $token = $user->createToken('auth_token')->plainTextToken;
 
+        if (Auth::user()->admin == 1) {
+            $role_id = $validatedData['role_id'];
+        } else {
+            $role_id = 1;
+        };
+
+
+        $ure = UserRoleEvent::create([
+            'user_id' => $user->id,
+            'event_id' => $validatedData['id_events'],
+            'role_id' =>  $role_id
+
+        ]);
         return response()->json([
             'success' => 'true',
             'token' => $token,

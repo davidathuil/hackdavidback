@@ -63,10 +63,11 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/me', [AuthController::class, 'me'])->middleware('auth:sanctum');
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
 Route::post('/admin/newusers', [UserController::class, 'store']);
+Route::post('/newusers', [UserController::class, 'store']);
 
 //PAGE PROFIL
 //route::get('/ProfilPages', [ProfilPageController::class, 'index'])->name('profilPages.index');
-route::post('/ProfilPages', [ProfilPageController::class, 'store'])->name('profilPages.store');
+route::post('/profilpages', [ProfilPageController::class, 'edit'])->name('profilPages.edit')->middleware('auth:sanctum');
 route::get('/ProfilPages/{id}', [ProfilPageController::class, 'show'])->name('profilPages.show');
 
 // USERS
@@ -81,6 +82,9 @@ Route::get('/usersskills', [UserSkillController::class, 'index'])->name('userski
 // EVENTS
 Route::get('/event', [EventController::class, 'index'])->name('event.index');
 Route::post('/event', [EventController::class, 'store'])->name('event.store');
+// Route::get('/event/{id}/edit', [EventController::class, 'edit'])->name('event.edit.id');
+Route::put('/event/{id}', [EventController::class, 'update'])->name('event.update.id');
+Route::delete('/event/{id}', [EventController::class, 'destroy'])->name('event.destroy.id');
 
 // URE
 Route::get('/users_roles_events', [UserRoleEventController::class, 'index'])->name('users_roles_events.index');
