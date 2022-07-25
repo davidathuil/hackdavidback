@@ -89,6 +89,7 @@ class ProfilPageController extends Controller
         return response()->json([
             'success' => true,
             'user' => Auth::user(),
+            'skills' => Skill::all(),
 
         ], 200);
     }

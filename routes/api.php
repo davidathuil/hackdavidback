@@ -1,15 +1,44 @@
 <?php
 
+//AUTH
 use App\Http\Controllers\AuthController;
+
+//PROFIL
 use App\Http\Controllers\ProfilPageController;
+
+//USERS
 use App\Http\Controllers\UserController;
+
+//SKILLS
+use App\Http\Controllers\SkillController;
+
+//USERSKILLS
+use App\Http\Controllers\UserSkillController;
+
+//EVENTS
 use App\Http\Controllers\EventController;
+
+//USERS ROLES EVENTS
 use App\Http\Controllers\UserRoleEventController;
+
+//ROLES
 use App\Http\Controllers\RoleController;
+
+//ROOMS
 use App\Http\Controllers\RoomController;
+
+//RUNNING ORDERS
 use App\Http\Controllers\RunningOrderController;
+
+//TEAMS
 use App\Http\Controllers\TeamController;
+
+//USERS TEAMS
 use App\Http\Controllers\UserTeamController;
+
+//TEAMS ROOMS
+use App\Http\Controllers\TeamRoomController;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -34,6 +63,7 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/me', [AuthController::class, 'me'])->middleware('auth:sanctum');
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
 Route::post('/admin/newusers', [UserController::class, 'store']);
+Route::post('/newusers', [UserController::class, 'store']);
 
 //PAGE PROFIL
 //route::get('/ProfilPages', [ProfilPageController::class, 'index'])->name('profilPages.index');
@@ -42,6 +72,12 @@ route::get('/ProfilPages/{id}', [ProfilPageController::class, 'show'])->name('pr
 
 // USERS
 Route::get('/users', [UserController::class, 'index'])->name('users.index');
+
+// SKILLS
+Route::get('/skills', [SkillController::class, 'index'])->name('skills.index');
+
+// USER_SKILLS
+Route::get('/usersskills', [UserSkillController::class, 'index'])->name('userskills.index');
 
 // EVENTS
 Route::get('/event', [EventController::class, 'index'])->name('event.index');
@@ -56,15 +92,21 @@ Route::get('/users_roles_events', [UserRoleEventController::class, 'index'])->na
 // ROLES
 Route::get('/roles', [RoleController::class, 'index'])->name('roles.index');
 
-// Teams
+// TEAMS
 Route::get('/teams', [TeamController::class, 'index'])->name('teams.index');
 Route::post('/teams', [TeamController::class, 'store'])->name('teams.store');
+
 // User teams
 Route::get('/usersteams', [UserTeamController::class, 'index'])->name('usersteams.index');
-Route::get('/usersteams', [UserTeamController::class, 'store'])->name('usersteams.store');
-// Rooms
+Route::post('/usersteams', [UserTeamController::class, 'store'])->name('usersteams.store');
+
+// TEAMS ROOMS
+Route::get('/teamsrooms', [TeamRoomController::class, 'index'])->name('teamsrooms.index');
+
+// ROOMS
 Route::get('/rooms', [RoomController::class, 'index'])->name('rooms.index');
 Route::post('/rooms', [RoomController::class, 'store'])->name('rooms.store');
-// RO
+
+// RUNNING ORDERS
 Route::get('/ro', [RunningOrderController::class, 'index'])->name('ro.index');
 Route::post('/ro', [RunningOrderController::class, 'store'])->name('ro.store');

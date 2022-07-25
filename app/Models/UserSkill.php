@@ -5,17 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Skill_user extends Model
+class UserSkill extends Model
 {
     use HasFactory;
 
     protected $guarded = ['id'];
 
-    public function user()
+    public function users()
     {
         return $this->belongsTo(User::class);
     }
-    public function room()
+    public function rooms()
     {
         return $this->belongsTo(Room::class);
     }

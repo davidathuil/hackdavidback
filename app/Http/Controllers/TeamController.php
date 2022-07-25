@@ -8,16 +8,12 @@ use App\Models\Team;
 
 class TeamController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        $team = Team::all();
+        $teams = Team::all();
 
-        return response()->json(["ure" => $team]);
+        return response()->json(["teams" => $teams]);
     }
 
     /**
