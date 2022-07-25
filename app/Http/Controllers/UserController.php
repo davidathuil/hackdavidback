@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Role;
 use App\Models\UserRoleEvent;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -33,81 +35,49 @@ class UserController extends Controller
    public function store(Request $request)
    {
 
-      // 'firstname_users'
-      // 'lastname_users'
-      // 'email_users'
-      // 'password_users'
-      // 'adress_users'
-      // 'likedin_link_users'
-      // 'web_link_users'
-      // 'github_link_users'
-      // 'portfolio_link_users'
-      // 'biography_users'
-      // 'image_link_users'
-      // 'admin'
-
-
-
-      $request->validate(
+      $validatedData = $request->validate(
          [
             'firstname_users' => 'required|alpha_dash',
             'lastname_users' => 'required|alpha_dash',
-            'email_users' => 'required|email:rfc,dns',
-            // 'email_verified_at' => 'email',
+            // 'email_users' => 'required|email:rfc,dns',
             'password' => 'string',
-            // 'adress_users' => 'alpha_dash',
-            // 'likedin_link_users' => 'alpha_dash',
-            // 'web_link_users' => 'alpha_dash',
-            // 'github_link_users' => 'alpha_dash',
-            // 'portfolio_link_users' => 'alpha_dash',
-            // 'biography_users' => 'alpha_dash',
-            // 'image_link_users' => 'alpha_dash',
-            // 'admin' => 'boolean',
-            //  'image_link_users' => 'mimes:jpg,jpeg,png|image',
+            // 'id_events' => 'required|numeric',
+            // 'role_id' => 'required|numeric',
 
          ]
       );
-      //   if ($request->file('image_link_users')) {
-      //       $file = $request->file('image_link_users');
-      //       $filename = date('YmdHi') . $file->getClientOriginalName();
-      //       $file->move(public_path('image_link_users'), $filename);
-      //   }
 
       $user = [
          'firstname_users' => $request->firstname_users,
          'lastname_users' => $request->lastname_users,
          'email_users' => $request->email_users,
-         // 'email_verified_at' => $request->email_verified_at,
          'password' => Hash::make($request->password),
-         // 'adress_users' => $request->adress_users,
-         // 'likedin_link_users' => $request->likedin_link_users,
-         // 'web_link_users' => $request->web_link_users,
-         // 'github_link_users' => $request->github_link_users,
-         // 'portfolio_link_users' => $request->portfolio_link_users,
-         // 'biography_users' => $request->biography_users,
-         // 'image_link_users' => $request->image_link_users,
-         // 'admin' => $request->admin,
-         // 'image' => $filename ?? $pathimage[$idphoto] ?? "",
-
-
-
 
 
       ];
 
       $newuser = User::create($user);
+      $token = $newuser->createToken('auth_token')->plainTextToken;
 
-      // prochaine etape role project staf   
-      //    $stafproject = [
-      //       'id_role' => 1,
-      //       'id_user' => $newuser->id,
-      //       'id_event ' =>$request->event ,
-      //   ];
-      //   users_roles_events::create($$stafproject);
+      // if (Auth::user()->admin == "1") {
+      $role_id = $request->role_id;
+      // } else {
+      //    $role_id = 1;
+      // };
+
+
+      $ure = UserRoleEvent::create([
+         'user_id' => $newuser->id,
+         'event_id' => 2,
+         'role_id' =>  $role_id,
+
+      ]);
 
       return response()->json([
          'success' => 'true',
          'data' => $newuser,
+         'ure' => $ure,
+
 
       ], 200);
    }
