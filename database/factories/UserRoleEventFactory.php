@@ -21,7 +21,7 @@ class UserRoleEventFactory extends Factory
     {
         return [
 
-            'role_id' => Role::all()->random()->id,
+            'id' => Role::all()->random()->id,
             'event_id' => Event::all()->random()->id_events,
             'user_id' => User::all()->random()->id,
 

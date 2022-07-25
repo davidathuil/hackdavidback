@@ -24,8 +24,8 @@ class TeamFactory extends Factory
             'names_teams' => $this->faker->word(),
             'names_projects_teams' => $this->faker->word(),
             'subject_teams' => $this->faker->word(),
-            'id_room_teams' => Room::all()->random()->id_rooms,
-            'id_events_teams' => Event::all()->random()->id_events,
+            'room_id' => Room::all()->random()->id,
+            'event_id' => Event::all()->random()->id,
         ];
     }
 }

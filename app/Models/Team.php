@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Team extends Model
 {
     use HasFactory;
-    protected $guarded = ['id_teams'];
+    protected $guarded = ['id'];
 
-    public function userteams()
+    public function usert()
     {
         return $this->hasMany(UserTeam::class);
     }

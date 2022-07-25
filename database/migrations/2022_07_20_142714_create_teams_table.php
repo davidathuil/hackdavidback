@@ -14,12 +14,12 @@ return new class extends Migration
     public function up()
     {
         Schema::create('teams', function (Blueprint $table) {
-            $table->id('id_teams');
+            $table->id('id');
             $table->string('names_teams');
             $table->string('names_projects_teams');
             $table->text('subject_teams');
-            $table->integer('id_room_teams');
-            $table->integer('id_events_teams');
+            $table->integer('room_id');
+            $table->integer('event_id');
             $table->timestamps();
         });
     }

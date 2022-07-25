@@ -21,8 +21,8 @@ class UserTeamFactory extends Factory
 
         return [
 
-            'id_team' => Team::all()->random()->id_teams,
-            'id_user' => User::all()->random()->id,
+            'team_id' => Team::all()->random()->id,
+            'user_id' => User::all()->random()->id,
         ];
     }
 }
