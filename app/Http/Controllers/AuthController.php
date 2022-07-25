@@ -38,12 +38,12 @@ class AuthController extends Controller
         };
 
 
-        $ure = UserRoleEvent::create([
-            'user_id' => $user->id,
-            'event_id' => $validatedData['id_events'],
-            'role_id' =>  $role_id
+        // $ure = UserRoleEvent::create([
+        //     'user_id' => $user->id,
+        //     'event_id' => $validatedData['id_events'],
+        //     'role_id' =>  $role_id
 
-        ]);
+        // ]);
         return response()->json([
             'success' => 'true',
             'token' => $token,
