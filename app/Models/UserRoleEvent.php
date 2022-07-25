@@ -9,4 +9,19 @@ class UserRoleEvent extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
+
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
+
+    public function events()
+    {
+        return $this->hasMany(Events::class);
+    }
+
+    public function roles()
+    {
+        return $this->hasMany(Role::class);
+    }
 }

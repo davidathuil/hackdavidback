@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\UserTeam;
 use Illuminate\Http\Request;
-use App\Models\Role;
 
-class RoleController extends Controller
+class UserTeamController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,18 +13,6 @@ class RoleController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        $roles = Role::all();
-
-        return response()->json(["roles" => $roles]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
     {
         //
     }
@@ -37,8 +25,33 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate(
+            [
+
+                'id_user' => 'required|Numeric',
+                'id_team' => 'required|Numeric',
+
+            ]
+        );
+
+        $userteam = [
+            'id_user' => $request->id_user,
+            'id_team' => $request->id_team,
+
+
+        ];
+
+        $newuserteam = UserTeam::create($userteam);
+
+
+        return response()->json([
+            'success' => 'true',
+            'data' => $newuserteam,
+
+        ], 200);
     }
+
+
 
     /**
      * Display the specified resource.
@@ -47,17 +60,6 @@ class RoleController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
     {
         //
     }

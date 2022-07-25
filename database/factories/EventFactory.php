@@ -18,9 +18,9 @@ class EventFactory extends Factory
     {
         return [
             'names_events' => $this->faker->name(),
-            'start_dates_events' => $this->faker->dateTime(),
-            'end_dates_events' => $this->faker->dateTime(),
-            'end_dates_inscriptions_events' =>  $this->faker->dateTime(),
+            'start_dates_events' => $this->faker->dateTimeInInterval('-1 week', '+3 days'),
+            'end_dates_events' => $this->faker->dateTimeInInterval('+3 days', '+5 days'),
+            'end_dates_inscriptions_events' =>  $this->faker->dateTimeInInterval('+3 week', '+6 weeks'),
             'location_events' =>  $this->faker->city(),
         ];
     }

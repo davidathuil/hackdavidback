@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('names_teams');
             $table->string('names_projects_teams');
             $table->text('subject_teams');
-            $table->date('id_room_teams');
-            $table->string('id_events_teams');
+            $table->integer('id_room_teams');
+            $table->integer('id_events_teams');
             $table->timestamps();
         });
     }

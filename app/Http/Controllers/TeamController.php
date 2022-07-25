@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Role;
+use App\Models\Team;
 
 class TeamController extends Controller
 {
@@ -34,8 +36,40 @@ class TeamController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $request->validate(
+            [
+                'names_teams' => 'required|string',
+                'names_projects_teams' => 'required|string',
+                'subject_teams' => 'required|string',
+                'id_room_teams' => 'required|Numeric',
+                'id_events_teams' => 'required|Numeric',
+
+            ]
+        );
+
+        $team = [
+            'names_teams' => $request->names_teams,
+            'names_projects_teams' => $request->names_projects_teams,
+            'subject_teams' => $request->subject_teams,
+            'id_room_teams' => $request->id_room_teams,
+            'id_events_teams' => $request->id_events_teams,
+
+
+        ];
+
+        $newteam = Team::create($team);
+
+
+        return response()->json([
+            'success' => 'true',
+            'data' => $newteam,
+
+        ], 208);
     }
+
+
+
 
     /**
      * Display the specified resource.

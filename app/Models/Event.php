@@ -17,4 +17,14 @@ class Event extends Model
         'end_dates_inscriptions_events',
         'location_events',
     ];
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class, 'user_role_events');
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'user_role_events');
+    }
 }
