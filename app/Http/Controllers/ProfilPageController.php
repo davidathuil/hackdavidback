@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Skill;
-use App\Models\Skills;
+use App\Models\UserSkill;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\ProfilPage;
@@ -71,9 +71,10 @@ class ProfilPageController extends Controller
      */
     public function show($id)
     {
+
         $user = user::find($id);
         $skills = Skill::all();
-        $user_skills = User::find($id)->users_skills;
+        $user_skills = UserSkill::with('id_user')->get();
 
         return response()->json([$user, $skills, $user_skills]);
     }

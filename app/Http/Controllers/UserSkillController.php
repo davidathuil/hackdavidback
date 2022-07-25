@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Skill;
 use Illuminate\Http\Request;
 use App\Models\UserSkill;
+
 
 class UserSkillController extends Controller
 {
@@ -12,6 +14,6 @@ class UserSkillController extends Controller
     {
         $uSkills = UserSkill::all();
 
-        return response()->json(["users_skills" => $uSkills]);
+        return response()->json(["users_skills" =>  $uSkills]);
     }
 }
