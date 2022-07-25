@@ -21,7 +21,7 @@ class UserSkillFactory extends Factory
         return [
 
             'skill_id' => Skill::all()->random()->id,
-            'user_id' => 1,
+            'user_id' => User::all()->random()->id,
         ];
     }
 }
