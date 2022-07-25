@@ -7,6 +7,7 @@ use App\Models\Skills;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\ProfilPage;
+use Illuminate\Support\Facades\Auth;
 
 
 class ProfilPageController extends Controller
@@ -83,10 +84,15 @@ class ProfilPageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request)
     {
-        //
+        return response()->json([
+            'success' => true,
+            'user' => Auth::user(),
+
+        ], 200);
     }
+
 
     /**
      * Update the specified resource in storage.

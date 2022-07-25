@@ -37,7 +37,7 @@ Route::post('/admin/newusers', [UserController::class, 'store']);
 
 //PAGE PROFIL
 //route::get('/ProfilPages', [ProfilPageController::class, 'index'])->name('profilPages.index');
-route::post('/ProfilPages', [ProfilPageController::class, 'store'])->name('profilPages.store');
+route::post('/profilpages', [ProfilPageController::class, 'edit'])->name('profilPages.edit')->middleware('auth:sanctum');
 route::get('/ProfilPages/{id}', [ProfilPageController::class, 'show'])->name('profilPages.show');
 
 // USERS
