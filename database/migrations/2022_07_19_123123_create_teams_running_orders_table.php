@@ -15,9 +15,9 @@ class CreateTeamsRunningOrdersTable extends Migration
     {
         Schema::create('teams_running_orders', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_ro_tableLinks_tro');
-            $table->integer('id_team_tableLinks_tro');
-            $table->integer('running_order_tableLinks_tro');
+            $table->integer('id_ro');
+            $table->integer('id_team');
+            $table->integer('running_order');
             $table->timestamps();
         });
     }
