@@ -6,6 +6,8 @@ use App\Models\Skill;
 use App\Models\Skills;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\ProfilPage;
+
 
 class ProfilPageController extends Controller
 {
@@ -17,7 +19,7 @@ class ProfilPageController extends Controller
     public function index()
     {
         $users = User::all();
-        return response()->json(['users' =>$users]);
+        return response()->json(['users' => $users]);
     }
 
     public function create()
@@ -33,7 +35,31 @@ class ProfilPageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'lastname_users' => 'required|string',
+            'firstname_users' => 'required|string',
+            'email_users' => 'required|string',
+            'adress_users' => 'string',
+            'likedin_link_users' => 'string',
+            'web_link_users' => 'string',
+            'github_link_users' => 'string',
+            'portfolio_link_users' => 'string',
+            'biography_users' => 'string',
+        ]);
+
+        $profilPage = [
+            'lastname_users' => $request->input('input_lastname_profil'),
+            'firstname_users' => $request->input('input_firstname_profil'),
+            'email_users' => $request->input('email_profil'),
+            'adress_users' => $request->input('input_address_profil'),
+            'likedin_link_users' => $request->input('input_linkedin_profil'),
+            'web_link_users' => $request->input('input_website_profil'),
+            'github_link_users' => $request->input('input_github_profil'),
+            'portfolio_link_users' => $request->input('input_portfolio_profil'),
+            'biography_users' => $request->input('input_bio_profil'),
+
+        ];
+        User::create($profilPage);
     }
 
     /**
@@ -48,8 +74,7 @@ class ProfilPageController extends Controller
         $skills = Skill::all();
         $user_skills = User::find($id)->users_skills;
 
-        return response()->json([$user, $skills ,$user_skills]);
-
+        return response()->json([$user, $skills, $user_skills]);
     }
 
     /**
@@ -70,9 +95,19 @@ class ProfilPageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $user)
     {
-        //
+        $user->update([
+            "input_lastname_profil" => $request->input_lastname_profil,
+            "input_firstname_profil" => $request->input_firstname_profil,
+            "email_profil" => $request->email_profil,
+            "adress_users" => $request->adress_users,
+            "likedin_link_users" => $request->likedin_link_users,
+            "web_link_users" => $request->web_link_users,
+            "github_link_users" => $request->github_link_users,
+            "portfolio_link_users" => $request->portfolio_link_users,
+            "biography_users" => $request->biography_users,
+        ]);
     }
 
     /**
