@@ -14,7 +14,9 @@ class UserTeamController extends Controller
      */
     public function index()
     {
-        //
+        $userteam = UserTeam::all();
+
+        return response()->json(["userteam" => $userteam]);
     }
 
     /**
