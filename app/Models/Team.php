@@ -9,4 +9,9 @@ class Team extends Model
 {
     use HasFactory;
     protected $guarded = ['id_teams'];
+
+    public function userteams()
+    {
+        return $this->hasMany(UserTeam::class);
+    }
 }
