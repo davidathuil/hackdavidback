@@ -34,6 +34,7 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/me', [AuthController::class, 'me'])->middleware('auth:sanctum');
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
 Route::post('/admin/newusers', [UserController::class, 'store']);
+Route::post('/newusers', [UserController::class, 'store']);
 
 //PAGE PROFIL
 //route::get('/ProfilPages', [ProfilPageController::class, 'index'])->name('profilPages.index');
