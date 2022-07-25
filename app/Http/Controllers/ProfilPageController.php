@@ -73,10 +73,12 @@ class ProfilPageController extends Controller
     {
 
         $user = user::find($id);
+        $user->user_skills;
         $skills = Skill::all();
-        $user_skills = UserSkill::with('id_user')->get();
+        // $user_skills = UserSkill::all();
 
-        return response()->json([$user, $skills, $user_skills]);
+        // return response()->json([$user, $skills, $user_skills]);
+        return response()->json([$user, $skills]);
     }
 
     /**

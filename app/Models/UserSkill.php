@@ -11,12 +11,12 @@ class UserSkill extends Model
 
     protected $guarded = ['id'];
 
-    // public function users()
-    // {
-    //     return $this->belongsTo(User::class);
-    // }
-    // public function skills()
-    // {
-    //     return $this->belongsTo(Skill::class);
-    // }
+    public function users()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+    public function skills()
+    {
+        return $this->belongsTo(Skill::class);
+    }
 }
