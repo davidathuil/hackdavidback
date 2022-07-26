@@ -90,11 +90,15 @@ class ProfilPageController extends Controller
     {
         $user = Auth::user();
         $user->userSkills;
+        $skills = Skill::all();
+        foreach ($skills as $skill) {
+            $skill->userskill;
+        }
 
         return response()->json([
             'success' => true,
             'user' => $user,
-            'skills' => Skill::all(),
+            'skills' => $skills,
 
         ], 200);
     }
