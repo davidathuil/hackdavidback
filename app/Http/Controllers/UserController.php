@@ -113,7 +113,25 @@ class UserController extends Controller
 
    public function update(Request $request, $id)
    {
+
+      // Validation de formulaire avant envoie dans la BDD
+      $request->validate(
+         [
+            'firstname_user' => 'required|alpha_dash',
+            'lastname_user' => 'required|alpha_dash',
+            'email_user' =>  'required|email',
+         ]
+      );
+
+      $user = User::find($id);
+      $user->firstname_users = $request->input('firstname_user');
+      $user->lastname_users = $request->input('lastname_user');
+      $user->email_users = $request->input('email_user');
+      $user->save();
+
+      return response()->json(["message" => 'ok']);
    }
+
 
 
    public function destroy($id)
