@@ -72,6 +72,8 @@ route::get('/profilpages/{id}', [ProfilPageController::class, 'show'])->name('pr
 
 // USERS
 Route::get('/users', [UserController::class, 'index'])->name('users.index');
+Route::get('/users/{id}', [UserController::class, 'user'])->name('users.user');
+Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update');
 
 // SKILLS
 Route::get('/skills', [SkillController::class, 'index'])->name('skills.index');
@@ -82,6 +84,7 @@ Route::get('/usersskills', [UserSkillController::class, 'index'])->name('userski
 // EVENTS
 Route::get('/event', [EventController::class, 'index'])->name('event.index');
 Route::post('/event', [EventController::class, 'store'])->name('event.store');
+
 // Route::get('/event/{id}/edit', [EventController::class, 'edit'])->name('event.edit.id');
 Route::put('/event/{id}', [EventController::class, 'update'])->name('event.update.id');
 Route::delete('/event/{id}', [EventController::class, 'destroy'])->name('event.destroy.id');
