@@ -11,8 +11,11 @@ class TeamController extends Controller
 
     public function index()
     {
-        $teams = Team::find(1);
-        $teams->usert;
+        $teams = Team::all();
+        foreach ($teams as $team) {
+            $team->usert;
+            $team->room;
+        }
 
         return response()->json(["teams" => $teams]);
     }

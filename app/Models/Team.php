@@ -14,4 +14,8 @@ class Team extends Model
     {
         return $this->hasMany(UserTeam::class);
     }
+    public function room()
+    {
+        return $this->hasOne(Room::class, 'id');
+    }
 }

@@ -52,6 +52,10 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Events::class, 'user_role_events');
     }
+    public function userteam()
+    {
+        return $this->hasMany(UserTeam::class);
+    }
 
     // public function skills()
     // {

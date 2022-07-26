@@ -17,6 +17,11 @@ class UserController extends Controller
       $idParticipants = UserRoleEvent::where('role_id', 2)->get('user_id');
 
       $users = User::all();
+      foreach ($users as $user) {
+         $user->userSkills;
+         $user->userteam;
+      }
+      // $users->userSkills;
       $admins = User::where('admin', 1)->get();
       $staffs = User::find($idStaffs);
       $participants = User::find($idParticipants);

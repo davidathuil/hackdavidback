@@ -11,6 +11,6 @@ class UserTeam extends Model
     protected $guarded = ['id'];
     public function teams()
     {
-        return $this->belongsTo(Team::class);
+        return $this->belongsTo(Team::class, 'team_id');
     }
 }

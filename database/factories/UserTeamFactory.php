@@ -22,7 +22,9 @@ class UserTeamFactory extends Factory
         return [
 
             'team_id' => Team::all()->random()->id,
-            'user_id' => User::all()->random()->id,
+            'user_id' => User::whereHas('roles', function ($query) {
+                return $query->where('role_id', 2);
+            })->get()->random()->id,
         ];
     }
 }
