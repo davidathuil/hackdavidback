@@ -88,9 +88,12 @@ class ProfilPageController extends Controller
      */
     public function edit(Request $request)
     {
+        $user = Auth::user();
+        $user->userSkills;
+
         return response()->json([
             'success' => true,
-            'user' => Auth::user(),
+            'user' => $user,
             'skills' => Skill::all(),
 
         ], 200);
