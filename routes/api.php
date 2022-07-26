@@ -72,6 +72,7 @@ route::get('/profilpages/{id}', [ProfilPageController::class, 'show'])->name('pr
 
 // USERS
 Route::get('/users', [UserController::class, 'index'])->name('users.index');
+Route::get('/users/{id}', [UserController::class, 'user'])->name('users.user');
 
 // SKILLS
 Route::get('/skills', [SkillController::class, 'index'])->name('skills.index');

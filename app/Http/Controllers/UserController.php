@@ -32,6 +32,18 @@ class UserController extends Controller
    }
 
 
+   public function user($id)
+   {
+      $user = User::findOrFail($id);
+      $skills = [];
+      foreach ($user->skills as $skill) {
+         array_push($skills, $skill);
+      }
+
+      return response()->json(["user" => $user, "skills" => $skills]);
+   }
+
+
    public function create()
    {
    }
