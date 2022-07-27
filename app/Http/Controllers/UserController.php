@@ -128,6 +128,60 @@ class UserController extends Controller
    }
 
 
+   public function userCreatedByAdmin(Request $request)
+   // pour l'utilisateur
+   {
+
+      $validatedData = $request->validate(
+         [
+            'firstname_users' => 'required|alpha_dash',
+            'lastname_users' => 'required|alpha_dash',
+            'email_users' => 'required|email:rfc,dns|unique:users',
+            'password' => 'string',
+            'event_id' => 'required|numeric',
+            'role_id' => 'required|numeric',
+
+         ]
+      );
+
+      $user = [
+         'firstname_users' => $request->firstname_users,
+         'lastname_users' => $request->lastname_users,
+         'email_users' => $request->email_users,
+         'password' => Hash::make($request->password),
+
+
+      ];
+
+      $newuser = User::FirstOrCreate($user);
+
+      $token = $newuser->createToken('auth_token')->plainTextToken;
+
+      $ure = [
+         'event_id' => $request->event_id,
+         'role_id' => $request->role_id,
+
+      ];
+
+
+      $ure = UserRoleEvent::firstOrCreate([
+         'user_id' => $newuser->id,
+         'event_id' => $request->event_id,
+         'role_id' =>  $request->role_id,
+      ]);
+
+
+      return response()->json([
+         'success' => 'true',
+         'data' => $newuser,
+         'ure' => $ure,
+         'token' => $token,
+         'token_type' => 'Bearer',
+
+      ], 200);
+   }
+
+
 
    public function show($id)
    {
