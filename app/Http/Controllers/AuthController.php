@@ -11,9 +11,10 @@ use App\Models\UserRoleEvent;
 
 class AuthController extends Controller
 {
+
     public function register(Request $request)
     {
-        // pour l'admin
+        // Filtres et validation du formulaire
         $validatedData = $request->validate([
             'firstname_users' => 'required|string|max:255',
             'lastname_users' => 'required|string|max:255',
@@ -49,9 +50,14 @@ class AuthController extends Controller
 
         ], 200);
     }
+
+
+
+
     public function login(Request $request)
     {
 
+        // Vérification d'existance de ce compte + connexion
         if (!Auth::attempt($request->only('email_users', 'password'))) {
             return response()->json([
                 'message' => 'Invalid login details'
@@ -60,7 +66,9 @@ class AuthController extends Controller
 
         $user = User::where('email_users', $request['email_users'])->firstOrFail();
 
+        // Création d'un token d'accès
         $token = $user->createToken('auth_token')->plainTextToken;
+
 
         return response()->json([
             'success' => true,
@@ -69,21 +77,30 @@ class AuthController extends Controller
         ], 200);
     }
 
+
+
+
     public function loginevent(Request $request, $id)
     {
-
+        // Vérification d'existance de ce compte + connexion
         if (!Auth::attempt($request->only('email_users', 'password'))) {
             return response()->json([
-                'message' => 'Invalid login details'
+                'message' => 'Les informations sont invalides'
             ], 401);
         }
 
         $user = User::where('email_users', $request['email_users'])->firstOrFail();
 
+
+        // Création d'un token d'accès
         $token = $user->createToken('auth_token')->plainTextToken;
+
+
+        // Vérification si le compte est déjà participant à cet évènement
         $uretest = UserRoleEvent::where('event_id', $id)
             ->where('user_id', $user->id)
             ->get();
+
         if (!$uretest) {
             $ure = UserRoleEvent::firstOrCreate([
                 'user_id' => $user->id,
@@ -91,7 +108,7 @@ class AuthController extends Controller
                 'role_id' =>   2,
             ]);
         } else {
-            $ure = "cette user est deja existant sur ce projet";
+            $ure = "cette user est deja existant sur cet évènement";
         }
 
         return response()->json([
@@ -104,9 +121,6 @@ class AuthController extends Controller
 
 
 
-
-
-
     public function me(Request $request)
     {
         return response()->json([
@@ -115,6 +129,10 @@ class AuthController extends Controller
 
         ], 200);
     }
+
+
+
+
 
     public function logout()
     {
