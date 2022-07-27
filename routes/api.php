@@ -85,7 +85,7 @@ Route::get('/usersskills', [UserSkillController::class, 'index'])->name('userski
 // EVENTS
 Route::get('/event', [EventController::class, 'index'])->name('event.index');
 Route::post('/event', [EventController::class, 'store'])->name('event.store');
-Route::put('/event/{id}', [EventController::class, 'update'])->name('event.update.id');
+Route::put('/event/{id}', [EventController::class, 'update'])->name('event.update');
 Route::delete('/event/{id}', [EventController::class, 'destroy'])->name('event.destroy.id');
 
 // URE
@@ -95,8 +95,8 @@ Route::get('/users_roles_events', [UserRoleEventController::class, 'index'])->na
 Route::get('/roles', [RoleController::class, 'index'])->name('roles.index');
 
 // TEAMS
-Route::get('/teams', [TeamController::class, 'index'])->name('teams.index');
-Route::post('/teams', [TeamController::class, 'store'])->name('teams.store');
+Route::get('/teamslist', [TeamController::class, 'index'])->name('teamslist.index');
+Route::post('/teamslist', [TeamController::class, 'store'])->name('teamslist.store');
 
 // User teams
 Route::get('/usersteams', [UserTeamController::class, 'index'])->name('usersteams.index');

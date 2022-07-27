@@ -16,11 +16,7 @@ class EventController extends Controller
     }
 
 
-    public function create()
-    {
-        //
-    }
-
+   
 
     public function store(Request $request)
     {
@@ -69,8 +65,8 @@ class EventController extends Controller
             'location_events' => 'required|string',
         ]);
 
-        $event = $id;
-        $event = Event::find($request->id_events);
+        
+        $event = Event::find($id);
         $event->names_event = $request->input('names_event');
         $event->start_dates_event = $request->input('start_dates_event');
         $event->end_dates_events = $request->input('end_dates_events');

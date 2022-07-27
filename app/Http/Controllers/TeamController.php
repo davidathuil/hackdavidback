@@ -39,13 +39,12 @@ class TeamController extends Controller
     public function store(Request $request)
     {
 
-        $request->validate(
-            [
+        $request->validate([
                 'names_teams' => 'required|string',
                 'names_projects_teams' => 'required|string',
                 'subject_teams' => 'required|string',
-                'id_room_teams' => 'required|Numeric',
-                'id_events_teams' => 'required|Numeric',
+                'id_room_teams' => 'Numeric',
+                'id_events_teams' => 'Numeric',
 
             ]
         );
@@ -60,14 +59,10 @@ class TeamController extends Controller
 
         ];
 
-        $newteam = Team::create($team);
+        $newTeam = Team::create($team);
 
 
-        return response()->json([
-            'success' => 'true',
-            'data' => $newteam,
-
-        ], 208);
+        return response()->json(['message' => 'Equipe créée avec succès !','team' => $newTeam,], 201);
     }
 
 
