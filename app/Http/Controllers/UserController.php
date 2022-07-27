@@ -163,5 +163,8 @@ class UserController extends Controller
 
    public function destroy($id)
    {
+      $user = User::find($id);
+      $user->delete();
+      return response()->json(['message' => 'Participant retiré de la liste avec succès !'], 201);
    }
 }
