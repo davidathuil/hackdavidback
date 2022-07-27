@@ -18,7 +18,7 @@ class AuthController extends Controller
             'lastname_users' => 'required|string|max:255',
             'email_users' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8',
-            'id_events' => 'required|numeric',
+            'event_id' => 'required|numeric',
             'role_id' => 'required|numeric',
         ]);
 
@@ -34,7 +34,7 @@ class AuthController extends Controller
         if (Auth::user()->admin == 1) {
             $role_id = $validatedData['role_id'];
         } else {
-            $role_id = 1;
+            $role_id = 2;
         };
 
 
@@ -69,6 +69,44 @@ class AuthController extends Controller
             'token_type' => 'Bearer',
         ], 200);
     }
+
+    public function loginevent(Request $request, $id)
+    {
+
+        if (!Auth::attempt($request->only('email_users', 'password'))) {
+            return response()->json([
+                'message' => 'Invalid login details'
+            ], 401);
+        }
+
+        $user = User::where('email_users', $request['email_users'])->firstOrFail();
+
+        $token = $user->createToken('auth_token')->plainTextToken;
+        $uretest = UserRoleEvent::where('event_id', $id)
+            ->where('user_id', $user->id)
+            ->get();
+        if (!$uretest) {
+            $ure = UserRoleEvent::firstOrCreate([
+                'user_id' => $user->id,
+                'event_id' => $id,
+                'role_id' =>   1,
+            ]);
+        } else {
+            $ure = "cette user est deja existant sur ce projet";
+        }
+
+        return response()->json([
+            'success' => true,
+            'token' => $token,
+            'ure' => $ure,
+            'test' => $uretest,
+        ], 200);
+    }
+
+
+
+
+
 
     public function me(Request $request)
     {

@@ -63,7 +63,8 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/me', [AuthController::class, 'me'])->middleware('auth:sanctum');
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
 Route::post('/admin/newusers', [UserController::class, 'store']);
-Route::post('/newusers', [UserController::class, 'store']);
+Route::post('/newusers/{id}', [UserController::class, 'store']);
+Route::post('/loginevent/{id}', [AuthController::class, 'loginevent']);
 
 //PAGE PROFIL
 //route::get('/ProfilPages', [ProfilPageController::class, 'index'])->name('profilPages.index');
@@ -74,7 +75,7 @@ route::get('/profilpages/{id}', [ProfilPageController::class, 'show'])->name('pr
 Route::get('/users', [UserController::class, 'index'])->name('users.index');
 Route::get('/users/{id}', [UserController::class, 'user'])->name('users.user');
 Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update');
-
+Route::post('/users', [UserController::class, 'store'])->name('users.store');
 // SKILLS
 Route::get('/skills', [SkillController::class, 'index'])->name('skills.index');
 
