@@ -144,19 +144,21 @@ class UserController extends Controller
       // Validation de formulaire avant envoie dans la BDD
       $request->validate(
          [
-            'firstname_user' => 'required|alpha_dash',
-            'lastname_user' => 'required|alpha_dash',
-            'email_user' =>  'required|email',
+            'firstname_users' => 'required',
+            'lastname_users' => 'required',
+            'email_users' =>  'required',
+
          ]
       );
 
       $user = User::find($id);
-      $user->firstname_users = $request->input('firstname_user');
-      $user->lastname_users = $request->input('lastname_user');
-      $user->email_users = $request->input('email_user');
+
+      $user->firstname_users = $request->firstname_users;
+      $user->lastname_users = $request->lastname_users;
+      $user->email_users = $request->email_users;
       $user->save();
 
-      return response()->json(["message" => 'ok']);
+      return response()->json(["message" => "Utilisateur modifié avec succès"]);
    }
 
 
