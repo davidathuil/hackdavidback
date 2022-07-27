@@ -23,11 +23,6 @@ class ProfilPageController extends Controller
         return response()->json(['users' => $users]);
     }
 
-    public function create()
-    {
-        //
-    }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -87,6 +82,15 @@ class ProfilPageController extends Controller
         // $user_skills = UserSkill::all();
         // return response()->json([$user, $skills, $user_skills]);
         return response()->json([$user, $skills]);
+    }
+
+    public function showOwn()
+    {
+        $user = Auth::user();
+        $user->userSkills;
+        $skills = Skill::all();
+
+        return response()->json(['user' => $user, "skills" => $skills]);
     }
 
     /**

@@ -21,7 +21,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('adress_users')->nullable();
-            $table->string('likedin_link_users')->nullable();
+            $table->string('linkedin_link_users')->nullable();
             $table->string('web_link_users')->nullable();
             $table->string('github_link_users')->nullable();
             $table->string('portfolio_link_users')->nullable();

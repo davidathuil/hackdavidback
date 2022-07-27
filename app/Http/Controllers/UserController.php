@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Role;
 use App\Models\UserRoleEvent;
+use App\Models\UserSkill;
 use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -54,6 +55,7 @@ class UserController extends Controller
 
 
    public function store(Request $request)
+   // pour l'utilisateur
    {
 
       $validatedData = $request->validate(
@@ -93,7 +95,7 @@ class UserController extends Controller
       // };
       $ure = [
          'event_id' => $request->event_id,
-         'role_id' => $request->role_id,
+         // 'role_id' => $request->role_id,
 
       ];
 
@@ -104,7 +106,7 @@ class UserController extends Controller
          'role_id' =>  2,
       ]);
 
-
+      // test  pour doublon project user firstorcrete ok
 
       // $ure = UserRoleEvent::create([
       //    'user_id' => [$newuser->id, Rule::unique('user_id')->where(fn ($query) => $query->where('event_id', $request->event_id))],
@@ -143,24 +145,38 @@ class UserController extends Controller
       // Validation de formulaire avant envoie dans la BDD
       $request->validate(
          [
-            'firstname_user' => 'required|alpha_dash',
-            'lastname_user' => 'required|alpha_dash',
-            'email_user' =>  'required|email',
+            'firstname_users' => 'required|alpha_dash',
+            'lastname_users' => 'required|alpha_dash',
+            'email_users' =>  'required|alpha_dash',
+            // (dégradation) 
+            // 'skills' => '',
          ]
       );
 
       $user = User::find($id);
-      $user->firstname_users = $request->input('firstname_user');
-      $user->lastname_users = $request->input('lastname_user');
-      $user->email_users = $request->input('email_user');
+
+      $user->firstname_users = $request->firstname_users;
+      $user->lastname_users = $request->lastname_users;
+      $user->email_users = $request->email_users;
       $user->save();
 
-      return response()->json(["message" => 'ok']);
+      foreach (){
+         $userskill = UserSkill::firstOrCreate([
+               'user_id' => $user->id,
+               'skill_id' => $request->,
+            ]);
+      };
+            
+
+      return response()->json(["message" => "Utilisateur modifié avec succès"]);
    }
 
 
 
    public function destroy($id)
    {
+      $user = User::find($id);
+      $user->delete();
+      return response()->json(['message' => 'Participant retiré de la liste avec succès !'], 201);
    }
 }
