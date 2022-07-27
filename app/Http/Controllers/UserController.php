@@ -148,7 +148,8 @@ class UserController extends Controller
             'firstname_users' => 'required|alpha_dash',
             'lastname_users' => 'required|alpha_dash',
             'email_users' =>  'required|alpha_dash',
-            'skills' => 'integer',
+            // (dégradation) 
+            // 'skills' => '',
          ]
       );
 
