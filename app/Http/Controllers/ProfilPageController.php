@@ -76,7 +76,7 @@ class ProfilPageController extends Controller
         $user->userSkills;
         $user->userteam;
         $user->roles;
-        $user->event;
+        $user->events;
 
         $skills = Skill::all();
         // $user_skills = UserSkill::all();
@@ -88,7 +88,7 @@ class ProfilPageController extends Controller
     {
         $user = Auth::user();
         $user->userSkills;
-        $user->event;
+        // $user->events;
         $skills = Skill::all();
 
         return response()->json(['user' => $user, "skills" => $skills]);
