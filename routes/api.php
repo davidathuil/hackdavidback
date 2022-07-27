@@ -68,14 +68,16 @@ Route::post('/loginevent/{id}', [AuthController::class, 'loginevent']);
 
 //PAGE PROFIL
 //route::get('/ProfilPages', [ProfilPageController::class, 'index'])->name('profilPages.index');
-route::post('/profilpages', [ProfilPageController::class, 'edit'])->name('profilPages.edit')->middleware('auth:sanctum');
-route::get('/profilpages/{id}', [ProfilPageController::class, 'show'])->name('profilPages.show');
+Route::post('/profilpages', [ProfilPageController::class, 'edit'])->name('profilPages.edit')->middleware('auth:sanctum');
+Route::get('/profilpages/{id}', [ProfilPageController::class, 'show'])->name('profilPages.show');
+Route::middleware('auth:sanctum')->get('/profilpages', [ProfilPageController::class, 'showOwn'])->name('profilPages.showOwn');
 
 // USERS
 Route::get('/users', [UserController::class, 'index'])->name('users.index');
 Route::get('/users/{id}', [UserController::class, 'user'])->name('users.user');
 Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update');
 Route::post('/users', [UserController::class, 'store'])->name('users.store');
+Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.destroy.id');
 // SKILLS
 Route::get('/skills', [SkillController::class, 'index'])->name('skills.index');
 
@@ -85,8 +87,6 @@ Route::get('/usersskills', [UserSkillController::class, 'index'])->name('userski
 // EVENTS
 Route::get('/event', [EventController::class, 'index'])->name('event.index');
 Route::post('/event', [EventController::class, 'store'])->name('event.store');
-
-// Route::get('/event/{id}/edit', [EventController::class, 'edit'])->name('event.edit.id');
 Route::put('/event/{id}', [EventController::class, 'update'])->name('event.update.id');
 Route::delete('/event/{id}', [EventController::class, 'destroy'])->name('event.destroy.id');
 
