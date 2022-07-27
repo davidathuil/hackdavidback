@@ -54,6 +54,7 @@ class UserController extends Controller
 
 
    public function store(Request $request)
+   // pour l'utilisateur
    {
 
       $validatedData = $request->validate(
@@ -93,7 +94,7 @@ class UserController extends Controller
       // };
       $ure = [
          'event_id' => $request->event_id,
-         'role_id' => $request->role_id,
+         // 'role_id' => $request->role_id,
 
       ];
 
@@ -104,7 +105,7 @@ class UserController extends Controller
          'role_id' =>  2,
       ]);
 
-
+      // test  pour doublon project user firstorcrete ok
 
       // $ure = UserRoleEvent::create([
       //    'user_id' => [$newuser->id, Rule::unique('user_id')->where(fn ($query) => $query->where('event_id', $request->event_id))],

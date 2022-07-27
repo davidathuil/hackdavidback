@@ -62,7 +62,7 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/me', [AuthController::class, 'me'])->middleware('auth:sanctum');
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
-Route::post('/admin/newusers', [UserController::class, 'store']);
+Route::post('/admin/newusers', [AuthController::class, 'register']);
 Route::post('/newusers/{id}', [UserController::class, 'store']);
 Route::post('/loginevent/{id}', [AuthController::class, 'loginevent']);
 
