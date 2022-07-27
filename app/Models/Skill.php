@@ -11,4 +11,9 @@ class Skill extends Model
 
     public $timestamps = false;
     protected $fillable = ['name_skills'];
+
+    public function userskill()
+    {
+        return $this->hasMany(UserSkill::class);
+    }
 }

@@ -88,7 +88,7 @@ class EventController extends Controller
      * @return \Illuminate\Http\Response
      */
    
-    public function destroy($id, $event)
+    public function destroy($id)
     {
         $event = Event::find($id);
         $event->delete();

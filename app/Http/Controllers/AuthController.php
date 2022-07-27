@@ -13,12 +13,13 @@ class AuthController extends Controller
 {
     public function register(Request $request)
     {
+        // pour l'admin
         $validatedData = $request->validate([
             'firstname_users' => 'required|string|max:255',
             'lastname_users' => 'required|string|max:255',
             'email_users' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8',
-            'id_events' => 'required|numeric',
+            'password' => 'required|string',
+            'event_id' => 'required|numeric',
             'role_id' => 'required|numeric',
         ]);
 
@@ -26,23 +27,26 @@ class AuthController extends Controller
 
         $token = $user->createToken('auth_token')->plainTextToken;
 
-        if (Auth::user()->admin == 1) {
-            $role_id = $validatedData['role_id'];
-        } else {
-            $role_id = 1;
-        };
+        // if (Auth::user()->admin == 1) {
+        //     $role_id = $validatedData['role_id'];
+        // } else {
+        //     $role_id = 2;
+        // };
 
 
-        // $ure = UserRoleEvent::create([
-        //     'user_id' => $user->id,
-        //     'event_id' => $validatedData['id_events'],
-        //     'role_id' =>  $role_id
+        $ure = UserRoleEvent::create([
+            'user_id' => $user->id,
+            'event_id' => $validatedData['event_id'],
+            'role_id' =>  $validatedData['role_id'],
 
-        // ]);
+        ]);
         return response()->json([
             'success' => 'true',
             'token' => $token,
             'token_type' => 'Bearer',
+            'admin authcontroler' => 'admin',
+            'ure' => $ure,
+
         ], 200);
     }
     public function login(Request $request)
@@ -64,6 +68,44 @@ class AuthController extends Controller
             'token_type' => 'Bearer',
         ], 200);
     }
+
+    public function loginevent(Request $request, $id)
+    {
+
+        if (!Auth::attempt($request->only('email_users', 'password'))) {
+            return response()->json([
+                'message' => 'Invalid login details'
+            ], 401);
+        }
+
+        $user = User::where('email_users', $request['email_users'])->firstOrFail();
+
+        $token = $user->createToken('auth_token')->plainTextToken;
+        $uretest = UserRoleEvent::where('event_id', $id)
+            ->where('user_id', $user->id)
+            ->get();
+        if (!$uretest) {
+            $ure = UserRoleEvent::firstOrCreate([
+                'user_id' => $user->id,
+                'event_id' => $id,
+                'role_id' =>   2,
+            ]);
+        } else {
+            $ure = "cette user est deja existant sur ce projet";
+        }
+
+        return response()->json([
+            'success' => true,
+            'token' => $token,
+            'ure' => $ure,
+            'test' => $uretest,
+        ], 200);
+    }
+
+
+
+
+
 
     public function me(Request $request)
     {
