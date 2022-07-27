@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Event;
 use Illuminate\Http\Request;
 use App\Models\Role;
 use App\Models\Team;
+use Illuminate\Support\Facades\Auth;
+
+
 
 class TeamController extends Controller
 {
@@ -38,6 +42,15 @@ class TeamController extends Controller
      */
     public function store(Request $request)
     {
+        $eventall = Event::all();
+
+        $user = Auth::user();
+        $userstaffroll = $user->roles->role_id = 1;
+        $userevent = $user->event;
+
+        $usereventrolestaff = $userevent->$userstaffroll;
+        // est ce que c'est juste?
+
 
         $request->validate(
             [
