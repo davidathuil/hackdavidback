@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Role;
 use App\Models\UserRoleEvent;
+use App\Models\UserSkill;
 use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -144,10 +145,11 @@ class UserController extends Controller
       // Validation de formulaire avant envoie dans la BDD
       $request->validate(
          [
-            'firstname_users' => 'required',
-            'lastname_users' => 'required',
-            'email_users' =>  'required',
-
+            'firstname_users' => 'required|alpha_dash',
+            'lastname_users' => 'required|alpha_dash',
+            'email_users' =>  'required|alpha_dash',
+            // (dégradation) 
+            // 'skills' => '',
          ]
       );
 
@@ -158,6 +160,14 @@ class UserController extends Controller
       $user->email_users = $request->email_users;
       $user->save();
 
+      // foreach (){
+      //    $userskill = UserSkill::firstOrCreate([
+      //          'user_id' => $user->id,
+      //          'skill_id' => $request->,
+      //       ]);
+      // };
+
+
       return response()->json(["message" => "Utilisateur modifié avec succès"]);
    }
 
@@ -165,5 +175,8 @@ class UserController extends Controller
 
    public function destroy($id)
    {
+      $user = User::find($id);
+      $user->delete();
+      return response()->json(['message' => 'Participant retiré de la liste avec succès !'], 201);
    }
 }

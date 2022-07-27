@@ -12,10 +12,11 @@ class Team extends Model
 
     public function usert()
     {
-        return $this->hasMany(UserTeam::class);
+        return $this->belongsToMany(User::class, UserTeam::class);
     }
+
     public function room()
     {
-        return $this->hasOne(Room::class, 'id');
+        return $this->belongsTo(Room::class, 'room_id');
     }
 }
