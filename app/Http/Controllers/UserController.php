@@ -6,8 +6,10 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Role;
 use App\Models\UserRoleEvent;
+use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+
 
 class UserController extends Controller
 {
@@ -20,6 +22,8 @@ class UserController extends Controller
       foreach ($users as $user) {
          $user->userSkills;
          $user->userteam;
+         $user->roles;
+         $user->event;
       }
       // $users->userSkills;
       $admins = User::where('admin', 1)->get();
@@ -50,15 +54,16 @@ class UserController extends Controller
 
 
    public function store(Request $request)
+   // pour l'utilisateur
    {
 
       $validatedData = $request->validate(
          [
             'firstname_users' => 'required|alpha_dash',
             'lastname_users' => 'required|alpha_dash',
-            // 'email_users' => 'required|email:rfc,dns',
+            'email_users' => 'required|email:rfc,dns|unique:users',
             'password' => 'string',
-            // 'id_events' => 'required|numeric',
+            'event_id' => 'required|numeric',
             // 'role_id' => 'required|numeric',
 
          ]
@@ -73,27 +78,49 @@ class UserController extends Controller
 
       ];
 
-      $newuser = User::create($user);
+      $newuser = User::FirstOrCreate($user);
+      // if (!$newuser) {
+      //    return response()->json([
+      //       'success' => 'false',
+      //       'error' => "user deja existant",
+      //    ]);
+      // }
       $token = $newuser->createToken('auth_token')->plainTextToken;
 
       // if (Auth::user()->admin == "1") {
-      $role_id = $request->role_id;
+      //$role_id = $request->role_id;
       // } else {
       //    $role_id = 1;
       // };
+      $ure = [
+         'event_id' => $request->event_id,
+         // 'role_id' => $request->role_id,
+
+      ];
 
 
-      $ure = UserRoleEvent::create([
+      $ure = UserRoleEvent::firstOrCreate([
          'user_id' => $newuser->id,
-         'event_id' => 2,
-         'role_id' =>  $role_id,
-
+         'event_id' => $request->event_id,
+         'role_id' =>  2,
       ]);
+
+      // test  pour doublon project user firstorcrete ok
+
+      // $ure = UserRoleEvent::create([
+      //    'user_id' => [$newuser->id, Rule::unique('user_id')->where(fn ($query) => $query->where('event_id', $request->event_id))],
+
+      //    'event_id' => 2,
+      //    'role_id' =>  $role_id,
+      // ]);
 
       return response()->json([
          'success' => 'true',
          'data' => $newuser,
          'ure' => $ure,
+         'token' => $token,
+         'token_type' => 'Bearer',
+
 
 
       ], 200);
@@ -117,19 +144,21 @@ class UserController extends Controller
       // Validation de formulaire avant envoie dans la BDD
       $request->validate(
          [
-            'firstname_user' => 'required|alpha_dash',
-            'lastname_user' => 'required|alpha_dash',
-            'email_user' =>  'required|email',
+            'firstname_users' => 'required',
+            'lastname_users' => 'required',
+            'email_users' =>  'required',
+
          ]
       );
 
       $user = User::find($id);
-      $user->firstname_users = $request->input('firstname_user');
-      $user->lastname_users = $request->input('lastname_user');
-      $user->email_users = $request->input('email_user');
+
+      $user->firstname_users = $request->firstname_users;
+      $user->lastname_users = $request->lastname_users;
+      $user->email_users = $request->email_users;
       $user->save();
 
-      return response()->json(["message" => 'ok']);
+      return response()->json(["message" => "Utilisateur modifié avec succès"]);
    }
 
 
