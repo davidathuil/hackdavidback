@@ -88,6 +88,7 @@ class ProfilPageController extends Controller
     {
         $user = Auth::user();
         $user->userSkills;
+        $user->event;
         $skills = Skill::all();
 
         return response()->json(['user' => $user, "skills" => $skills]);
