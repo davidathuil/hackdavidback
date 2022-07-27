@@ -68,8 +68,9 @@ Route::post('/loginevent/{id}', [AuthController::class, 'loginevent']);
 
 //PAGE PROFIL
 //route::get('/ProfilPages', [ProfilPageController::class, 'index'])->name('profilPages.index');
-route::post('/profilpages', [ProfilPageController::class, 'edit'])->name('profilPages.edit')->middleware('auth:sanctum');
-route::get('/profilpages/{id}', [ProfilPageController::class, 'show'])->name('profilPages.show');
+Route::post('/profilpages', [ProfilPageController::class, 'edit'])->name('profilPages.edit')->middleware('auth:sanctum');
+Route::get('/profilpages/{id}', [ProfilPageController::class, 'show'])->name('profilPages.show');
+Route::middleware('auth:sanctum')->get('/profilpages', [ProfilPageController::class, 'showOwn'])->name('profilPages.showOwn');
 
 // USERS
 Route::get('/users', [UserController::class, 'index'])->name('users.index');
