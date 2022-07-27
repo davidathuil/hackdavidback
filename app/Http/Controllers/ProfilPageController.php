@@ -46,7 +46,10 @@ class ProfilPageController extends Controller
             'github_link_users' => 'string',
             'portfolio_link_users' => 'string',
             'biography_users' => 'string',
+            "image_link_users" => 'bail|image|max:1024',
         ]);
+
+        $chemin_image = $request->picture->store("posts");
 
         $profilPage = [
             'lastname_users' => $request->input('input_lastname_profil'),
@@ -58,8 +61,10 @@ class ProfilPageController extends Controller
             'github_link_users' => $request->input('input_github_profil'),
             'portfolio_link_users' => $request->input('input_portfolio_profil'),
             'biography_users' => $request->input('input_bio_profil'),
+            "picture" => $chemin_image,
 
         ];
+
         User::create($profilPage);
     }
 
