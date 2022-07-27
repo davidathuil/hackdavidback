@@ -40,7 +40,7 @@ class User extends Authenticatable
 
     public function userSkills()
     {
-        return $this->hasMany(UserSkill::class,);
+        return $this->hasMany(UserSkill::class);
     }
 
     public function roles()
