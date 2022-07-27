@@ -160,13 +160,13 @@ class UserController extends Controller
       $user->email_users = $request->email_users;
       $user->save();
 
-      foreach (){
-         $userskill = UserSkill::firstOrCreate([
-               'user_id' => $user->id,
-               'skill_id' => $request->,
-            ]);
-      };
-            
+      // foreach (){
+      //    $userskill = UserSkill::firstOrCreate([
+      //          'user_id' => $user->id,
+      //          'skill_id' => $request->,
+      //       ]);
+      // };
+
 
       return response()->json(["message" => "Utilisateur modifié avec succès"]);
    }
