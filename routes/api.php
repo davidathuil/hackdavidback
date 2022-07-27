@@ -98,8 +98,9 @@ Route::get('/users_roles_events', [UserRoleEventController::class, 'index'])->na
 Route::get('/roles', [RoleController::class, 'index'])->name('roles.index');
 
 // TEAMS
-Route::get('/teamslist', [TeamController::class, 'index'])->name('teamslist.index');
-Route::post('/teamslist', [TeamController::class, 'store'])->name('teamslist.store');
+Route::middleware('auth:sanctum')->get('/teamslist', [TeamController::class, 'index'])->name('teamslist.index');
+Route::middleware('auth:sanctum')->post('/teamslist', [TeamController::class, 'store'])->name('teamslist.store');
+
 
 // User teams
 Route::get('/usersteams', [UserTeamController::class, 'index'])->name('usersteams.index');
