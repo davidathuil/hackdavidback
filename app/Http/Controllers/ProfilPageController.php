@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Skill;
-use App\Models\UserSkill;
 use Illuminate\Http\Request;
 use App\Models\User;
-use App\Models\ProfilPage;
 use Illuminate\Support\Facades\Auth;
+
+use Illuminate\Support\Facades\Storage;
 
 
 class ProfilPageController extends Controller
@@ -31,36 +31,7 @@ class ProfilPageController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'lastname_users' => 'required|string',
-            'firstname_users' => 'required|string',
-            'email_users' => 'required|string',
-            'adress_users' => 'string',
-            'likedin_link_users' => 'string',
-            'web_link_users' => 'string',
-            'github_link_users' => 'string',
-            'portfolio_link_users' => 'string',
-            'biography_users' => 'string',
-            "image_link_users" => 'bail|image|max:1024',
-        ]);
-
-        $chemin_image = $request->picture->store("posts");
-
-        $profilPage = [
-            'lastname_users' => $request->input('input_lastname_profil'),
-            'firstname_users' => $request->input('input_firstname_profil'),
-            'email_users' => $request->input('email_profil'),
-            'adress_users' => $request->input('input_address_profil'),
-            'likedin_link_users' => $request->input('input_linkedin_profil'),
-            'web_link_users' => $request->input('input_website_profil'),
-            'github_link_users' => $request->input('input_github_profil'),
-            'portfolio_link_users' => $request->input('input_portfolio_profil'),
-            'biography_users' => $request->input('input_bio_profil'),
-            "picture" => $chemin_image,
-
-        ];
-
-        User::create($profilPage);
+        //
     }
 
     /**
@@ -117,7 +88,6 @@ class ProfilPageController extends Controller
         ], 200);
     }
 
-
     /**
      * Update the specified resource in storage.
      *
@@ -125,19 +95,54 @@ class ProfilPageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $user)
+    public function update(Request $request)
     {
-        $user->update([
-            "input_lastname_profil" => $request->input_lastname_profil,
-            "input_firstname_profil" => $request->input_firstname_profil,
-            "email_profil" => $request->email_profil,
-            "adress_users" => $request->adress_users,
-            "likedin_link_users" => $request->likedin_link_users,
-            "web_link_users" => $request->web_link_users,
-            "github_link_users" => $request->github_link_users,
-            "portfolio_link_users" => $request->portfolio_link_users,
-            "biography_users" => $request->biography_users,
-        ]);
+        $user = Auth::user();
+
+        // 1. La validation
+        $rules = [
+            'lastname_users' => 'required|string',
+            'firstname_users' => 'required|string',
+            'adress_users' => 'string|nullable',
+            'likedin_link_users' => 'url|nullable',
+            'web_link_users' => 'url|nullable',
+            'github_link_users' => 'url|nullable',
+            'portfolio_link_users' => 'url|nullable',
+            'biography_users' => 'string|nullable',
+            "image_link_users" => 'image|max:1024|nullable'
+        ];
+
+        // Si une nouvelle image est envoyée
+        if ($request->has("image_link_users")) {
+            // On ajoute la règle de validation pour "picture"
+            $rules["image_link_users"] = 'bail|image|max:1024';
+        }
+
+        $this->validate($request, $rules);
+
+        // On upload l'image dans "/storage/app/public/profile_img"
+        if ($request->has("image_link_users")) {
+
+            // On supprime l'ancienne image
+            if (isset($user->profile_img)) {
+                Storage::delete($user->profile_img);
+            }
+
+            $path_image = $request->image_link_users->store("public");
+        }
+
+        $user->image_link_users = isset($path_image) ? $path_image : $user->image_link_users;
+        $user->firstname_users = $request->firstname_users;
+        $user->lastname_users = $request->lastname_users;
+        $user->adress_users = $request->adress_users;
+        $user->biography_users = $request->biography_users;
+        $user->web_link_users = $request->web_link_users;
+        $user->likedin_link_users = $request->likedin_link_users;
+        $user->github_link_users = $request->github_link_users;
+        $user->portfolio_link_users = $request->portfolio_link_user;
+        $user->save();
+
+        return response()->json(["message" => "User updated"]);
     }
 
     /**
