@@ -32,4 +32,9 @@ class Event extends Model
     {
         return $this->hasMany(Team::class);
     }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'user_role_events');
+    }
 }

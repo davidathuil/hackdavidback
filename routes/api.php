@@ -68,7 +68,6 @@ Route::get('/logout', [AuthController::class, 'logout'])->middleware('auth:sanct
 //PAGE PROFIL
 
 Route::middleware('auth:sanctum')->put('/profiles', [ProfilPageController::class, 'update'])->name('profiles.update');
-
 Route::get('/profiles/{id}', [ProfilPageController::class, 'show'])->name('profiles.show');
 Route::middleware('auth:sanctum')->get('/profiles', [ProfilPageController::class, 'showOwn'])->name('profiles.showOwn');
 
@@ -76,10 +75,12 @@ Route::middleware('auth:sanctum')->get('/profiles', [ProfilPageController::class
 Route::get('/users', [UserController::class, 'index'])->name('users.index');
 Route::get('/users/{id}', [UserController::class, 'user'])->name('users.user');
 Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update');
+
 // Route::post('/users', [UserController::class, 'store'])->name('users.store');
 Route::post('/newusers/{id}', [UserController::class, 'store']);
 Route::post('/users', [UserController::class, 'userCreatedByAdmin']);
 Route::delete('/users/{id?}', [UserController::class, 'destroy'])->name('users.destroy.id');
+
 // SKILLS
 Route::get('/skills', [SkillController::class, 'index'])->name('skills.index');
 

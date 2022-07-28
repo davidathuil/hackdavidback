@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
+use App\Models\Role;
 use App\Models\Team;
+use App\Models\User;
+use App\Models\UserRoleEvent;
 use Illuminate\Http\Request;
 
 class EventController extends Controller
@@ -48,8 +51,17 @@ class EventController extends Controller
     {
         $event = Event::find($id);
         $teams = Team::with('event')->where('event_id', $id)->get();
+        $users = $event->users;
+        foreach ($users as $user) {
+            $user->skills;
+            $user->roles;
+        };
+        $tests = UserRoleEvent::where([['role_id', 1], ['event_id', $id]])->get();
+        foreach ($tests as $test) {
+            $test->user;
+        };
 
-        return response()->json(["event" => $event, "teams" => $teams]);
+        return response()->json(["event" => $event, "teams" => $teams, "tests" => $tests]);
     }
 
 
