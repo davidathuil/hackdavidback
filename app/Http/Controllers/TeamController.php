@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Role;
 use App\Models\Team;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Room;
 
 
 
@@ -20,8 +21,9 @@ class TeamController extends Controller
             $team->usert;
             $team->room;
         }
+        $rooms = Room::all();
 
-        return response()->json(["teams" => $teams]);
+        return response()->json(["teams" => $teams,"rooms"=> $rooms]);
     }
 
     /**
@@ -42,13 +44,13 @@ class TeamController extends Controller
      */
     public function store(Request $request)
     {
-        $eventall = Event::all();
+        // $eventall = Event::all();
 
-        $user = Auth::user();
-        $userstaffroll = $user->roles->role_id = 1;
-        $userevent = $user->event;
+        // $user = Auth::user();
+        // $userstaffroll = $user->roles->role_id = 1;
+        // $userevent = $user->event;
 
-        $usereventrolestaff = $userevent->$userstaffroll;
+        // $usereventrolestaff = $userevent->$userstaffroll;
         // est ce que c'est juste?
 
 
@@ -70,7 +72,7 @@ class TeamController extends Controller
             'room_id' => $request->room_id,
             'event_id' => $request->event_id,
 
-
+            
         ];
 
         $newTeam = Team::create($team);
