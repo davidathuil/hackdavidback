@@ -23,7 +23,7 @@ class TeamController extends Controller
         }
         $rooms = Room::all();
 
-        return response()->json(["teams" => $teams,"rooms"=> $rooms]);
+        return response()->json(["teams" => $teams, "rooms" => $rooms]);
     }
 
     /**
@@ -72,7 +72,7 @@ class TeamController extends Controller
             'room_id' => $request->room_id,
             'event_id' => $request->event_id,
 
-            
+
         ];
 
         $newTeam = Team::create($team);
@@ -126,6 +126,8 @@ class TeamController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $team = Team::find($id);
+        $team->delete();
+        return response()->json(['message' => 'Équipe supprimé avec succès !'], 201);
     }
 }

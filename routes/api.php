@@ -100,6 +100,7 @@ Route::get('/roles', [RoleController::class, 'index'])->name('roles.index');
 // TEAMS
 Route::middleware('auth:sanctum')->get('/teamslist', [TeamController::class, 'index'])->name('teamslist.index');
 Route::middleware('auth:sanctum')->post('/teamslist', [TeamController::class, 'store'])->name('teamslist.store');
+Route::delete('/teamslist/{id?}', [TeamController::class, 'destroy'])->name('teamslist.destroy.id');
 
 
 // User teams
