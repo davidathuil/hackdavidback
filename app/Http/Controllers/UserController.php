@@ -201,7 +201,7 @@ class UserController extends Controller
          [
             'firstname_users' => 'required|alpha_dash',
             'lastname_users' => 'required|alpha_dash',
-            'email_users' =>  'required|alpha_dash',
+            'email_users' =>  'required|email',
             // (dégradation) 
             // 'skills' => '',
          ]
@@ -214,6 +214,10 @@ class UserController extends Controller
       $user->email_users = $request->email_users;
       $user->save();
 
+      $URE = UserRoleEvent::where('event_id', $request->event_id)->where('user_id', $user->id)->first();
+      $newrole = $URE->role_id = $request->role_id;
+      $URE->save();
+
       // foreach (){
       //    $userskill = UserSkill::firstOrCreate([
       //          'user_id' => $user->id,
@@ -222,7 +226,7 @@ class UserController extends Controller
       // };
 
 
-      return response()->json(["message" => "Utilisateur modifié avec succès"]);
+      return response()->json(["message" => "Utilisateur modifié avec succès", "le nouveau role" => $newrole, "URE" => $URE]);
    }
 
 
