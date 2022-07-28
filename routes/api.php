@@ -66,8 +66,9 @@ Route::post('/admin/newusers', [AuthController::class, 'register']);
 Route::post('/loginevent/{id}', [AuthController::class, 'loginevent']);
 Route::get('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
 //PAGE PROFIL
-//route::get('/ProfilPages', [ProfilPageController::class, 'index'])->name('profilPages.index');
-Route::post('/profiles', [ProfilPageController::class, 'edit'])->name('profiles.edit')->middleware('auth:sanctum');
+
+Route::middleware('auth:sanctum')->put('/profiles', [ProfilPageController::class, 'update'])->name('profiles.update');
+
 Route::get('/profiles/{id}', [ProfilPageController::class, 'show'])->name('profiles.show');
 Route::middleware('auth:sanctum')->get('/profiles', [ProfilPageController::class, 'showOwn'])->name('profiles.showOwn');
 
@@ -90,6 +91,8 @@ Route::get('/event', [EventController::class, 'index'])->name('event.index');
 Route::post('/event', [EventController::class, 'store'])->name('event.store');
 Route::put('/event/{id}', [EventController::class, 'update'])->name('event.update');
 Route::delete('/event/{id}', [EventController::class, 'destroy'])->name('event.destroy.id');
+Route::get('/event/{id}', [EventController::class, 'show'])->name('events.show');
+
 
 // URE
 Route::get('/users_roles_events', [UserRoleEventController::class, 'index'])->name('users_roles_events.index');
@@ -100,6 +103,7 @@ Route::get('/roles', [RoleController::class, 'index'])->name('roles.index');
 // TEAMS
 Route::middleware('auth:sanctum')->get('/teamslist', [TeamController::class, 'index'])->name('teamslist.index');
 Route::middleware('auth:sanctum')->post('/teamslist', [TeamController::class, 'store'])->name('teamslist.store');
+Route::delete('/teamslist/{id?}', [TeamController::class, 'destroy'])->name('teamslist.destroy.id');
 
 
 // User teams

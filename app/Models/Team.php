@@ -19,4 +19,9 @@ class Team extends Model
     {
         return $this->belongsTo(Room::class, 'room_id');
     }
+
+    public function event()
+    {
+        return $this->belongsTo(Event::class, 'event_id');
+    }
 }

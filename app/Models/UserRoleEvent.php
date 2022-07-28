@@ -12,16 +12,16 @@ class UserRoleEvent extends Model
 
     public function users()
     {
-        return $this->hasMany(User::class);
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
     public function events()
     {
-        return $this->hasMany(Events::class);
+        return $this->belongsTo(Event::class);
     }
 
     public function roles()
     {
-        return $this->hasMany(Role::class);
+        return $this->belongsTo(Role::class);
     }
 }
