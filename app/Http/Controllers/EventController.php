@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
+use App\Models\Team;
 use Illuminate\Http\Request;
 
 class EventController extends Controller
@@ -11,6 +12,7 @@ class EventController extends Controller
     public function index()
     {
         $event = Event::all();
+
 
         return response()->json(["event" => $event]);
     }
@@ -45,8 +47,9 @@ class EventController extends Controller
     public function show($id)
     {
         $event = Event::find($id);
+        $teams = Team::with('event')->where('event_id', $id)->get();
 
-        return response()->json(["event" => $event]);
+        return response()->json(["event" => $event, "teams" => $teams]);
     }
 
 
