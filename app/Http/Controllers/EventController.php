@@ -52,16 +52,27 @@ class EventController extends Controller
         $event = Event::find($id);
         $teams = Team::with('event')->where('event_id', $id)->get();
         $users = $event->users;
-        foreach ($users as $user) {
-            $user->skills;
-            $user->roles;
-        };
-        $tests = UserRoleEvent::where([['role_id', 1], ['event_id', $id]])->get();
-        foreach ($tests as $test) {
-            $test->user;
+        foreach ($teams as $team) {
+            $team->room;
         };
 
-        return response()->json(["event" => $event, "teams" => $teams, "tests" => $tests]);
+        $staffs = UserRoleEvent::where([['role_id', 1], ['event_id', $id]])->get();
+        $staffUsers = [];
+        foreach ($staffs as $staff) {
+            array_push($staffUsers, $staff->user);
+        };
+
+        // AU CAS OU PEUT ETRE JE SAIS PAS...
+        // $participants = UserRoleEvent::where([['role_id', 2], ['event_id', $id]])->get();
+        // $partUsers = [];
+        // foreach ($participants as $participant) {
+        //     array_push($partUsers, $participant->user);
+        // };
+        // foreach ($partUsers as $user) {
+        //     $user->skills;
+        // }
+
+        return response()->json(["event" => $event, "teams" => $teams, "staffs" => $staffUsers]);
     }
 
 
