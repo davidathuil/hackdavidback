@@ -6,6 +6,7 @@ use App\Models\Skill;
 use App\Models\UserSkill;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Event;
 use App\Models\ProfilPage;
 use Illuminate\Support\Facades\Auth;
 
@@ -88,10 +89,11 @@ class ProfilPageController extends Controller
     {
         $user = Auth::user();
         $user->userSkills;
-        // $user->events;
+        $user->userEvents;
         $skills = Skill::all();
+        $events = Event::all();
 
-        return response()->json(['user' => $user, "skills" => $skills]);
+        return response()->json(['user' => $user, "skills" => $skills, "events" => $events]);
     }
 
     /**

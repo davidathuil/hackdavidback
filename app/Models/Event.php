@@ -18,13 +18,13 @@ class Event extends Model
         'location_events',
     ];
 
-    public function roles()
+    public function userevents()
     {
-        return $this->belongsToMany(Role::class, 'user_role_events');
+        return $this->hasMany(UserRoleEvent::class);
     }
 
-    public function users()
+    public function roles()
     {
-        return $this->belongsToMany(User::class, 'user_role_events');
+        return $this->hasMany(Role::class);
     }
 }

@@ -43,23 +43,32 @@ class User extends Authenticatable
         return $this->hasMany(UserSkill::class);
     }
 
+    public function skills()
+    {
+        return $this->belongsToMany(Skill::class, 'user_skills');
+    }
+
+
     public function roles()
     {
         return $this->belongsToMany(Role::class, 'user_role_events');
     }
 
-    public function events()
-    {
-        return $this->belongsToMany(Events::class, 'user_role_events');
-    }
+
 
     public function userteam()
     {
         return $this->hasMany(UserTeam::class);
     }
 
-    public function skills()
+
+    public function events()
     {
-        return $this->belongsToMany(Skill::class, 'user_skills');
+        return $this->belongsToMany(Event::class, 'user_role_events');
+    }
+
+    public function userEvents()
+    {
+        return $this->hasMany(UserRoleEvent::class);
     }
 }
