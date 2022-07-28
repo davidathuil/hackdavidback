@@ -64,7 +64,7 @@ Route::post('/me', [AuthController::class, 'me'])->middleware('auth:sanctum');
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
 Route::post('/admin/newusers', [AuthController::class, 'register']);
 Route::post('/loginevent/{id}', [AuthController::class, 'loginevent']);
-
+Route::get('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
 //PAGE PROFIL
 //route::get('/ProfilPages', [ProfilPageController::class, 'index'])->name('profilPages.index');
 Route::post('/profiles', [ProfilPageController::class, 'edit'])->name('profiles.edit')->middleware('auth:sanctum');
