@@ -16,7 +16,7 @@ class EventController extends Controller
     }
 
 
-   
+
 
     public function store(Request $request)
     {
@@ -44,7 +44,9 @@ class EventController extends Controller
 
     public function show($id)
     {
-        //
+        $event = Event::find($id);
+
+        return response()->json(["event" => $event]);
     }
 
 
@@ -65,7 +67,7 @@ class EventController extends Controller
             'location_events' => 'required|string',
         ]);
 
-        
+
         $event = Event::find($id);
         $event->names_event = $request->input('names_event');
         $event->start_dates_event = $request->input('start_dates_event');
@@ -83,7 +85,7 @@ class EventController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-   
+
     public function destroy($id)
     {
         $event = Event::find($id);
@@ -91,4 +93,3 @@ class EventController extends Controller
         return response()->json(['message' => 'Evènement supprimé avec succès !'], 201);
     }
 }
-
