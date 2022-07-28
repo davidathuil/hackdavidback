@@ -127,11 +127,11 @@ class ProfilPageController extends Controller
         if ($request->has("image_link_users")) {
 
             // On supprime l'ancienne image
-            if (isset($user->profile_img)) {
-                Storage::delete($user->profile_img);
+            if (isset($user->image_link_users)) {
+                Storage::delete($user->image_link_users);
             }
 
-            $path_image = $request->image_link_users->store("public");
+            $path_image = $request->image_link_users->store("avatar");
         }
 
         $user->image_link_users = isset($path_image) ? $path_image : $user->image_link_users;

@@ -56,7 +56,7 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        dd($request->all());
+ 
         // Vérification d'existance de ce compte + connexion
         if (!Auth::attempt($request->only('email_users', 'password'))) {
             return response()->json([
