@@ -27,4 +27,9 @@ class Event extends Model
     {
         return $this->hasMany(Role::class);
     }
+
+    public function teams()
+    {
+        return $this->hasMany(Team::class);
+    }
 }
