@@ -16,37 +16,26 @@ class UserController extends Controller
 {
    public function index()
    {
-      $checklogin = auth('sanctum')->check();
-      $checkuser = Auth::user()->admin;
-      if ($checkuser !== 1) {
-         $checkadmin = "admin pas ok";
+      $idStaffs = UserRoleEvent::where('role_id', 1)->get('user_id');
+      $idParticipants = UserRoleEvent::where('role_id', 2)->get('user_id');
 
-         return response()->json(["checkadmin" => $checkadmin, "checklogin" => $checklogin]);
-         // return redirect()->route('event.index');
-      } else {
-         $checkadmin = "admin ok";
-         $checklogin = true;
-
-         $idStaffs = UserRoleEvent::where('role_id', 1)->get('user_id');
-         $idParticipants = UserRoleEvent::where('role_id', 2)->get('user_id');
-
-         $users = User::all();
-         foreach ($users as $user) {
-            $user->userSkills;
-            $user->userteam;
-            $user->roles;
-            $user->event;
-         }
-         // $users->userSkills;
-         $admins = User::where('admin', 1)->get();
-         $staffs = User::find($idStaffs);
-         $participants = User::find($idParticipants);
-         $ure = UserRoleEvent::get();
-
-
-         return response()->json(["users" => $users, "admins" => $admins, "staffs" => $staffs, "participants" => $participants, "user_role_event" => $ure, "checkadmin" => $checkadmin, "checklogin" => $checklogin]);
+      $users = User::all();
+      foreach ($users as $user) {
+         $user->userSkills;
+         $user->userteam;
+         $user->roles;
+         $user->event;
       }
+      // $users->userSkills;
+      $admins = User::where('admin', 1)->get();
+      $staffs = User::find($idStaffs);
+      $participants = User::find($idParticipants);
+      $ure = UserRoleEvent::get();
+
+
+      return response()->json(["users" => $users, "admins" => $admins, "staffs" => $staffs, "participants" => $participants, "user_role_event" => $ure]);
    }
+
 
    public function user($id)
    {
@@ -142,8 +131,6 @@ class UserController extends Controller
    public function userCreatedByAdmin(Request $request)
    // pour l'utilisateur
    {
-      // if (Auth::user()->admin == 1) {
-      $admin = Auth::user()->id;
 
       $validatedData = $request->validate(
          [
@@ -183,17 +170,17 @@ class UserController extends Controller
          'role_id' =>  $request->role_id,
       ]);
 
+
       return response()->json([
          'success' => 'true',
          'data' => $newuser,
          'ure' => $ure,
          'token' => $token,
          'token_type' => 'Bearer',
-         'admin' => $admin
 
       ], 200);
    }
-   // }
+
 
 
    public function show($id)
@@ -215,7 +202,7 @@ class UserController extends Controller
             'firstname_users' => 'required|alpha_dash',
             'lastname_users' => 'required|alpha_dash',
             'email_users' =>  'required|email',
-            // (dégradation)
+            // (dégradation) 
             // 'skills' => '',
          ]
       );

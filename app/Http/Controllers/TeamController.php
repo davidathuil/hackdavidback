@@ -85,19 +85,10 @@ class TeamController extends Controller
     public function show($id)
     {
         $team = Team::find($id);
-        // $teamUsers = $team->users;
+        $teamUsers = $team->users;
 
 
-        return response()->json(["team" => $team]);
-
-        // vide à la base
-
-        // $team = Team::find($id);
-        // $teamUsers = $team->users;
-
-
-        // return response()->json(["team" => $team, "users" => $teamUsers]);
-
+        return response()->json(["team" => $team, "users" => $teamUsers]);
     }
 
 

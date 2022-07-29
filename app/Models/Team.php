@@ -10,14 +10,9 @@ class Team extends Model
     use HasFactory;
     protected $guarded = ['id'];
 
-    // public function userT()
-    // {
-    //     return $this->belongsToMany(UserTeam::class, 'user_teams');
-    // }
-
-    public function usert()
+    public function userT()
     {
-        return $this->belongsToMany(User::class, UserTeam::class);
+        return $this->belongsToMany(UserTeam::class, 'user_teams');
     }
 
     public function room()

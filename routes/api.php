@@ -65,20 +65,20 @@ Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanc
 Route::post('/admin/newusers', [AuthController::class, 'register']);
 Route::post('/loginevent/{id}', [AuthController::class, 'loginevent']);
 Route::get('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
-//PAGE PROFIL
 
+//PAGE PROFIL
 Route::middleware('auth:sanctum')->put('/profiles', [ProfilPageController::class, 'update'])->name('profiles.update');
-Route::middleware('auth:sanctum')->get('/profiles/{id}', [ProfilPageController::class, 'show'])->name('profiles.show');
+Route::get('/profiles/{id}', [ProfilPageController::class, 'show'])->name('profiles.show');
 Route::middleware('auth:sanctum')->get('/profiles', [ProfilPageController::class, 'showOwn'])->name('profiles.showOwn');
 
 // USERS
-Route::middleware('auth:sanctum')->get('/users', [UserController::class, 'index'])->name('users.index');
-Route::middleware('auth:sanctum')->get('/users/{id}', [UserController::class, 'user'])->name('users.user');
-Route::middleware('auth:sanctum')->put('/users/{id}', [UserController::class, 'update'])->name('users.update');
+Route::get('/users', [UserController::class, 'index'])->name('users.index');
+Route::get('/users/{id}', [UserController::class, 'user'])->name('users.user');
+Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update');
 
 // Route::post('/users', [UserController::class, 'store'])->name('users.store');
 Route::post('/newusers/{id}', [UserController::class, 'store']);
-Route::middleware('auth:sanctum')->post('/users', [UserController::class, 'userCreatedByAdmin']);
+Route::post('/users', [UserController::class, 'userCreatedByAdmin']);
 Route::delete('/users/{id?}', [UserController::class, 'destroy'])->name('users.destroy.id');
 
 // SKILLS
@@ -88,12 +88,11 @@ Route::get('/skills', [SkillController::class, 'index'])->name('skills.index');
 Route::get('/usersskills', [UserSkillController::class, 'index'])->name('userskills.index');
 
 // EVENTS
-Route::middleware('auth:sanctum')->get('/event', [EventController::class, 'index'])->name('event.index');
-Route::get('/homeevent', [EventController::class, 'index'])->name('homeevent.index');
-Route::middleware('auth:sanctum')->post('/event', [EventController::class, 'store'])->name('event.store');
-Route::middleware('auth:sanctum')->put('/event/{id}', [EventController::class, 'update'])->name('event.update');
-Route::middleware('auth:sanctum')->delete('/event/{id}', [EventController::class, 'destroy'])->name('event.destroy.id');
-Route::middleware('auth:sanctum')->get('/event/{id}', [EventController::class, 'show'])->name('events.show');
+Route::get('/event', [EventController::class, 'index'])->name('event.index');
+Route::post('/event', [EventController::class, 'store'])->name('event.store');
+Route::put('/event/{id}', [EventController::class, 'update'])->name('event.update');
+Route::delete('/event/{id}', [EventController::class, 'destroy'])->name('event.destroy.id');
+Route::get('/event/{id}', [EventController::class, 'show'])->name('events.show');
 
 
 // URE
@@ -103,14 +102,15 @@ Route::get('/users_roles_events', [UserRoleEventController::class, 'index'])->na
 Route::get('/roles', [RoleController::class, 'index'])->name('roles.index');
 
 // TEAMS
-Route::get('/teamslist', [TeamController::class, 'index'])->name('teamslist.index');
+Route::middleware('auth:sanctum')->get('/teamslist', [TeamController::class, 'index'])->name('teamslist.index');
 Route::middleware('auth:sanctum')->post('/teamslist', [TeamController::class, 'store'])->name('teamslist.store');
-Route::middleware('auth:sanctum')->delete('/teamslist/{id?}', [TeamController::class, 'destroy'])->name('teamslist.destroy.id');
+Route::delete('/teamslist/{id?}', [TeamController::class, 'destroy'])->name('teamslist.destroy.id');
+Route::get('/teamslist/{id}', [TeamController::class, 'show']);
 
 
 // User teams
-Route::middleware('auth:sanctum')->get('/usersteams', [UserTeamController::class, 'index'])->name('usersteams.index');
-Route::middleware('auth:sanctum')->post('/usersteams', [UserTeamController::class, 'store'])->name('usersteams.store');
+Route::get('/usersteams', [UserTeamController::class, 'index'])->name('usersteams.index');
+Route::post('/usersteams', [UserTeamController::class, 'store'])->name('usersteams.store');
 
 // TEAMS ROOMS
 Route::get('/teamsrooms', [TeamRoomController::class, 'index'])->name('teamsrooms.index');
