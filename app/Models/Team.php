@@ -17,7 +17,7 @@ class Team extends Model
 
     public function usert()
     {
-        return $this->belongsToMany(User::class, UserTeam::class);
+        return $this->belongsToMany(UserTeam::class, 'user_teams');
     }
 
     public function room()
