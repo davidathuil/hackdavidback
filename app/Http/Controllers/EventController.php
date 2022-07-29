@@ -63,9 +63,9 @@ class EventController extends Controller
             array_push($staffUsers, $staff->user->id);
         };
         $key = array_search("auth ne marche pas meme avec middelware", $staffUsers);
-        if (!$key) {
-            return response()->json(["checkstaff" => "ne fait pas partie du staff", "checkadmin" => 13, "key" => $key]);
-        }
+        // if (!$key) {
+        //     return response()->json(["checkstaff" => "ne fait pas partie du staff", "checkadmin" => 13, "key" => $key]);
+        // }
         // AU CAS OU PEUT ETRE JE SAIS PAS...
         // $participants = UserRoleEvent::where([['role_id', 2], ['event_id', $id]])->get();
         // $partUsers = [];
@@ -75,9 +75,9 @@ class EventController extends Controller
         // foreach ($partUsers as $user) {
         //     $user->skills;
         // }
-        else {
-            return response()->json(["event" => $event, "teams" => $teams, "staffs" => $staffs, "check" => $staffUsers]);
-        }
+        // else {
+        return response()->json(["event" => $event, "teams" => $teams, "staffs" => $staffs, "check" => $staffUsers]);
+        // }
     }
 
     public function edit($id)
