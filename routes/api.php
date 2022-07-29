@@ -88,11 +88,12 @@ Route::get('/skills', [SkillController::class, 'index'])->name('skills.index');
 Route::get('/usersskills', [UserSkillController::class, 'index'])->name('userskills.index');
 
 // EVENTS
-Route::get('/event', [EventController::class, 'index'])->name('event.index');
+Route::middleware('auth:sanctum')->get('/event', [EventController::class, 'index'])->name('event.index');
+Route::get('/homeevent', [EventController::class, 'index'])->name('homeevent.index');
 Route::middleware('auth:sanctum')->post('/event', [EventController::class, 'store'])->name('event.store');
 Route::middleware('auth:sanctum')->put('/event/{id}', [EventController::class, 'update'])->name('event.update');
 Route::middleware('auth:sanctum')->delete('/event/{id}', [EventController::class, 'destroy'])->name('event.destroy.id');
-Route::get('/event/{id}', [EventController::class, 'show'])->name('events.show');
+Route::middleware('auth:sanctum')->get('/event/{id}', [EventController::class, 'show'])->name('events.show');
 
 
 // URE
