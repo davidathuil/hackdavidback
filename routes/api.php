@@ -92,7 +92,7 @@ Route::get('/event', [EventController::class, 'index'])->name('event.index');
 Route::middleware('auth:sanctum')->post('/event', [EventController::class, 'store'])->name('event.store');
 Route::middleware('auth:sanctum')->put('/event/{id}', [EventController::class, 'update'])->name('event.update');
 Route::middleware('auth:sanctum')->delete('/event/{id}', [EventController::class, 'destroy'])->name('event.destroy.id');
-Route::middleware('auth:sanctum')->get('/event/{id}', [EventController::class, 'show'])->name('events.show');
+Route::get('/event/{id}', [EventController::class, 'show'])->name('events.show');
 
 
 // URE
@@ -102,7 +102,7 @@ Route::get('/users_roles_events', [UserRoleEventController::class, 'index'])->na
 Route::get('/roles', [RoleController::class, 'index'])->name('roles.index');
 
 // TEAMS
-Route::middleware('auth:sanctum')->get('/teamslist', [TeamController::class, 'index'])->name('teamslist.index');
+Route::get('/teamslist', [TeamController::class, 'index'])->name('teamslist.index');
 Route::middleware('auth:sanctum')->post('/teamslist', [TeamController::class, 'store'])->name('teamslist.store');
 Route::middleware('auth:sanctum')->delete('/teamslist/{id?}', [TeamController::class, 'destroy'])->name('teamslist.destroy.id');
 

@@ -25,7 +25,12 @@ class AuthController extends Controller
         ]);
 
 
-
+        $user = User::create([
+            'firstname_users' => $validatedData['firstname_users'],
+            'lastname_users' => $validatedData['lastname_users'],
+            'email_users' => $validatedData['email_users'],
+            'password' => Hash::make($validatedData['password']),
+        ]);
         $token = $user->createToken('auth_token')->plainTextToken;
 
         // if (Auth::user()->admin == 1) {
