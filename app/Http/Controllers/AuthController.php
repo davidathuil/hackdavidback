@@ -56,7 +56,7 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
- 
+
         // Vérification d'existance de ce compte + connexion
         if (!Auth::attempt($request->only('email_users', 'password'))) {
             return response()->json([
@@ -65,6 +65,12 @@ class AuthController extends Controller
         }
 
         $user = User::where('email_users', $request['email_users'])->firstOrFail();
+        if ($user->admin == 1) {
+            $admin = "admin";
+        } else { {
+                $admin = "non admin";
+            }
+        }
 
         // Création d'un token d'accès
         $token = $user->createToken('auth_token')->plainTextToken;
@@ -74,6 +80,7 @@ class AuthController extends Controller
             'success' => true,
             'token' => $token,
             'token_type' => 'Bearer',
+            'admin' => $admin,
         ], 200);
     }
 
