@@ -8,7 +8,6 @@ use App\Models\Team;
 use App\Models\User;
 use App\Models\UserRoleEvent;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class EventController extends Controller
 {
@@ -60,12 +59,16 @@ class EventController extends Controller
         $staffs = UserRoleEvent::where([['role_id', 1], ['event_id', $id]])->get();
         $staffUsers = [];
         foreach ($staffs as $staff) {
-            array_push($staffUsers, $staff->user->id);
+            array_push($staffUsers, $staff->user);
         };
+<<<<<<< HEAD
         $key = array_search("auth ne marche pas meme avec middelware", $staffUsers);
         // if (!$key) {
         //     return response()->json(["checkstaff" => "ne fait pas partie du staff", "checkadmin" => 13, "key" => $key]);
         // }
+=======
+
+>>>>>>> 3d7b674853db024f62ae8a6dd2475c419de6344e
         // AU CAS OU PEUT ETRE JE SAIS PAS...
         // $participants = UserRoleEvent::where([['role_id', 2], ['event_id', $id]])->get();
         // $partUsers = [];
@@ -75,10 +78,16 @@ class EventController extends Controller
         // foreach ($partUsers as $user) {
         //     $user->skills;
         // }
+<<<<<<< HEAD
         // else {
         return response()->json(["event" => $event, "teams" => $teams, "staffs" => $staffs, "check" => $staffUsers]);
         // }
+=======
+
+        return response()->json(["event" => $event, "teams" => $teams, "staffs" => $staffUsers]);
+>>>>>>> 3d7b674853db024f62ae8a6dd2475c419de6344e
     }
+
 
     public function edit($id)
     {
