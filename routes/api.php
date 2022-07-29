@@ -88,12 +88,9 @@ Route::get('/skills', [SkillController::class, 'index'])->name('skills.index');
 Route::get('/usersskills', [UserSkillController::class, 'index'])->name('userskills.index');
 
 // EVENTS
-<<<<<<< HEAD
+
 Route::middleware('auth:sanctum')->get('/event', [EventController::class, 'index'])->name('event.index');
 Route::get('/homeevent', [EventController::class, 'index'])->name('homeevent.index');
-=======
-Route::get('/event', [EventController::class, 'index'])->name('event.index');
->>>>>>> 3d7b674853db024f62ae8a6dd2475c419de6344e
 Route::post('/event', [EventController::class, 'store'])->name('event.store');
 Route::put('/event/{id}', [EventController::class, 'update'])->name('event.update');
 Route::delete('/event/{id}', [EventController::class, 'destroy'])->name('event.destroy.id');
@@ -107,16 +104,11 @@ Route::get('/users_roles_events', [UserRoleEventController::class, 'index'])->na
 Route::get('/roles', [RoleController::class, 'index'])->name('roles.index');
 
 // TEAMS
-<<<<<<< HEAD
+
 Route::get('/teamslist', [TeamController::class, 'index'])->name('teamslist.index');
 Route::post('/teamslist', [TeamController::class, 'store'])->name('teamslist.store');
 Route::delete('/teamslist/{id?}', [TeamController::class, 'destroy'])->name('teamslist.destroy.id');
-=======
-Route::middleware('auth:sanctum')->get('/teamslist', [TeamController::class, 'index'])->name('teamslist.index');
-Route::middleware('auth:sanctum')->post('/teamslist', [TeamController::class, 'store'])->name('teamslist.store');
-Route::delete('/teamslist/{id?}', [TeamController::class, 'destroy'])->name('teamslist.destroy.id');
 Route::get('/teamslist/{id}', [TeamController::class, 'show']);
->>>>>>> 3d7b674853db024f62ae8a6dd2475c419de6344e
 
 
 // User teams
