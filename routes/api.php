@@ -65,8 +65,8 @@ Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanc
 Route::post('/admin/newusers', [AuthController::class, 'register']);
 Route::post('/loginevent/{id}', [AuthController::class, 'loginevent']);
 Route::get('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
-//PAGE PROFIL
 
+//PAGE PROFIL
 Route::middleware('auth:sanctum')->put('/profiles', [ProfilPageController::class, 'update'])->name('profiles.update');
 Route::get('/profiles/{id}', [ProfilPageController::class, 'show'])->name('profiles.show');
 Route::middleware('auth:sanctum')->get('/profiles', [ProfilPageController::class, 'showOwn'])->name('profiles.showOwn');
@@ -105,6 +105,7 @@ Route::get('/roles', [RoleController::class, 'index'])->name('roles.index');
 Route::middleware('auth:sanctum')->get('/teamslist', [TeamController::class, 'index'])->name('teamslist.index');
 Route::middleware('auth:sanctum')->post('/teamslist', [TeamController::class, 'store'])->name('teamslist.store');
 Route::delete('/teamslist/{id?}', [TeamController::class, 'destroy'])->name('teamslist.destroy.id');
+Route::get('/teamslist/{id}', [TeamController::class, 'show']);
 
 
 // User teams
